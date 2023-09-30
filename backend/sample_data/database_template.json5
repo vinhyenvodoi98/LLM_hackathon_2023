@@ -1,6 +1,9 @@
 {
     "data_model": {
         "data_type": {
+            // whether selected value can be multi or not
+            multi_choices: false,
+            // value that is accepted
             "accepted_values": [
                 "Vector",
                 "StringOrNumber",
@@ -9,6 +12,8 @@
             "description": "Which type of data that you want to save into your DB?"
         },
         "structured_data": {
+            multi_choices: false,
+            // condition where this need to be asked
             "conditions": {
                 "data_model": {
                     "data_type": ["StringOrNumber"]
@@ -47,6 +52,7 @@
     },
     "requirements": {
         "volume":  {
+            // TODO: need to defined how much data is SMALL, MEDIUM or HIGH
             "accepted_values": [
                 "SMALL",
                 "MEDIUM",
