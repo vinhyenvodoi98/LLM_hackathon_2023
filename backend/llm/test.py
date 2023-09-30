@@ -3,8 +3,6 @@ from dotenv import load_dotenv
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.llms import GooglePalm
-from langchain.llms.loading import load_llm
-
 
 
 load_dotenv()
@@ -12,8 +10,7 @@ load_dotenv()
 ACTIVELOOP_TOKEN = os.getenv('ACTIVELOOP_TOKEN')
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
-# llm = GooglePalm(model="models/text-bison-001", temperature="0", google_api_key=GOOGLE_API_KEY)
-llm = load_llm("./llm_setup_data/llm.json")
+llm = GooglePalm(model="models/text-bison-001", temperature="0", google_api_key=GOOGLE_API_KEY)
 template = """
 As a certified public accountant, I need you to explain the definition of a term and give me examples of when this term is used.
 What does the term {term} mean?
