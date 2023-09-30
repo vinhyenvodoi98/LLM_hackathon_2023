@@ -1,0 +1,115 @@
+{
+    "data_model": {
+        "data_type": {
+            "accepted_values": [
+                "Vector",
+                "StringOrNumber",
+                "FullText"
+            ],
+            "description": "Which type of data that you want to save into your DB?"
+        },
+        "structured_data": {
+            "conditions": {
+                "data_model": {
+                    "data_type": ["StringOrNumber"]
+                }
+            },
+            "accepted_values": [
+                true,
+                false
+            ],
+            "description": "Is your data structured and normalized?"
+        },
+        "time_series": {
+            "conditions": {
+                "data_model": {
+                    "data_type": ["StringOrNumber"]
+                }
+            },
+            "accepted_values": [
+                true,
+                false
+            ],
+            "description": "Is your data time series?"
+        },
+        "relationship_centric": {
+            "conditions": {
+                "data_model": {
+                    "data_type": ["StringOrNumber"]
+                }
+            },
+            "accepted_values": [
+                true,
+                false
+            ],
+            "description": "Do you have a lot of complicated relationship between data?"
+        }
+    },
+    "requirements": {
+        "volume":  {
+            "accepted_values": [
+                "SMALL",
+                "MEDIUM",
+                "HIGH"
+            ],
+            "description": "How much data do you need to store?"
+        },
+        "query_patterns": {
+            "conditions": {
+                "data_model": {
+                    "data_type": ["StringOrNumber"]
+                }
+            },
+            "accepted_values": [
+                true,
+                false
+            ],
+            "description": "Do you have to do a lot of complex queries?"
+        },
+        "read": {
+            // consistency in CAD
+            "accepted_values": [
+                true,
+                false
+            ],
+            "description": "Is read consistency (any read request will return the most recent write) one of the most important requirements?"
+        },
+        "write": {
+            "accepted_values": [
+                true,
+                false
+            ],
+            "description": "Do you have to write data frequently?"
+        },
+        "update": {
+            "conditions": {
+                "data_model": {
+                    "data_type": ["StringOrNumber", "FullText"]
+                }
+            },
+            "accepted_values": [
+                true,
+                false
+            ],
+            "description": "Do you have to update existing data frequently?"
+        },
+        "availability": {
+            // availability in CAD
+            "accepted_values": [
+                true,
+                false
+            ],
+            "description": "Can you accept less than 99% uptime for database?"
+        }
+    },
+    "cost": {
+        "budget": {
+            "accepted_values": [
+                "SMALL",
+                "MEDIUM",
+                "HIGH"
+            ],
+            "description": "How much is your budget for building and maintaining a database?"
+        }
+    }
+}
