@@ -1,7 +1,7 @@
 from typing import List
 
-from backend.database.technologies import db_technologies
-from backend.models.technology import DBTechnology
+from database.technologies import db_technologies
+from models.technology import DBTechnology
 
 
 def get_all_technologies() -> List[DBTechnology]:
