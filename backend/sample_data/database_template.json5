@@ -1,0 +1,130 @@
+{
+    "data_model": {
+        "data_type": {
+            // whether selected value can be multi or not
+            multi_choices: false,
+            // value that is accepted
+            "accepted_values": [
+                "Vector",
+                "StringOrNumber",
+                "FullText"
+            ],
+            "description": "Which type of data that you want to save into your DB?"
+        },
+        "structured_data": {
+            // condition where this need to be asked
+            "conditions": {
+                "data_model": {
+                    "data_type": ["StringOrNumber"]
+                }
+            },
+            multi_choices: false,
+            "accepted_values": [
+                true,
+                false
+            ],
+            "description": "Is your data structured and normalized?"
+        },
+        "time_series": {
+            "conditions": {
+                "data_model": {
+                    "data_type": ["StringOrNumber"]
+                }
+            },
+            multi_choices: false,
+            "accepted_values": [
+                true,
+                false
+            ],
+            "description": "Is your data time series?"
+        },
+        "relationship_centric": {
+            "conditions": {
+                "data_model": {
+                    "data_type": ["StringOrNumber"]
+                }
+            },
+            multi_choices: false,
+            "accepted_values": [
+                true,
+                false
+            ],
+            "description": "Do you have a lot of complicated relationship between data?"
+        }
+    },
+    "requirements": {
+        "volume":  {
+            multi_choices: true,
+            // TODO: need to defined how much data is SMALL, MEDIUM or HIGH
+            "accepted_values": [
+                "SMALL",
+                "MEDIUM",
+                "HIGH"
+            ],
+            "description": "How much data do you need to store?"
+        },
+        "query_patterns": {
+            "conditions": {
+                "data_model": {
+                    "data_type": ["StringOrNumber"]
+                }
+            },
+            multi_choices: false,
+            "accepted_values": [
+                true,
+                false
+            ],
+            "description": "Do you have to do a lot of complex queries?"
+        },
+        "read": {
+            multi_choices: false,
+            // consistency in CAD
+            "accepted_values": [
+                true,
+                false
+            ],
+            "description": "Is read consistency (any read request will return the most recent write) one of the most important requirements?"
+        },
+        "write": {
+            multi_choices: false,
+            "accepted_values": [
+                true,
+                false
+            ],
+            "description": "Do you have to write data frequently?"
+        },
+        "update": {
+            "conditions": {
+                "data_model": {
+                    "data_type": ["StringOrNumber", "FullText"]
+                }
+            },
+            multi_choices: false,
+            "accepted_values": [
+                true,
+                false
+            ],
+            "description": "Do you have to update existing data frequently?"
+        },
+        "availability": {
+            multi_choices: false,
+            // availability in CAD
+            "accepted_values": [
+                true,
+                false
+            ],
+            "description": "Can you accept less than 99% uptime for database?"
+        }
+    },
+    "cost": {
+        "budget": {
+            multi_choices: false,
+            "accepted_values": [
+                "SMALL",
+                "MEDIUM",
+                "HIGH"
+            ],
+            "description": "How much is your budget for building and maintaining a database?"
+        }
+    }
+}
