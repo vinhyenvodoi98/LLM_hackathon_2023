@@ -12,13 +12,13 @@
             "description": "Which type of data that you want to save into your DB?"
         },
         "structured_data": {
-            multi_choices: false,
             // condition where this need to be asked
             "conditions": {
                 "data_model": {
                     "data_type": ["StringOrNumber"]
                 }
             },
+            multi_choices: false,
             "accepted_values": [
                 true,
                 false
@@ -31,6 +31,7 @@
                     "data_type": ["StringOrNumber"]
                 }
             },
+            multi_choices: false,
             "accepted_values": [
                 true,
                 false
@@ -43,6 +44,7 @@
                     "data_type": ["StringOrNumber"]
                 }
             },
+            multi_choices: false,
             "accepted_values": [
                 true,
                 false
@@ -52,6 +54,7 @@
     },
     "requirements": {
         "volume":  {
+            multi_choices: true,
             // TODO: need to defined how much data is SMALL, MEDIUM or HIGH
             "accepted_values": [
                 "SMALL",
@@ -66,6 +69,7 @@
                     "data_type": ["StringOrNumber"]
                 }
             },
+            multi_choices: false,
             "accepted_values": [
                 true,
                 false
@@ -73,6 +77,7 @@
             "description": "Do you have to do a lot of complex queries?"
         },
         "read": {
+            multi_choices: false,
             // consistency in CAD
             "accepted_values": [
                 true,
@@ -81,6 +86,7 @@
             "description": "Is read consistency (any read request will return the most recent write) one of the most important requirements?"
         },
         "write": {
+            multi_choices: false,
             "accepted_values": [
                 true,
                 false
@@ -93,6 +99,7 @@
                     "data_type": ["StringOrNumber", "FullText"]
                 }
             },
+            multi_choices: false,
             "accepted_values": [
                 true,
                 false
@@ -100,6 +107,7 @@
             "description": "Do you have to update existing data frequently?"
         },
         "availability": {
+            multi_choices: false,
             // availability in CAD
             "accepted_values": [
                 true,
@@ -110,6 +118,7 @@
     },
     "cost": {
         "budget": {
+            multi_choices: false,
             "accepted_values": [
                 "SMALL",
                 "MEDIUM",
