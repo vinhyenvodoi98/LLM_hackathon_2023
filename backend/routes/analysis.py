@@ -4,13 +4,13 @@ import time
 from fastapi import APIRouter
 
 from models.analysis.database_analysis import (
-    APIDatabaseAnalysisResult,
-    APIAnalysisPostRequest,
+    APIDatabaseAnalysisResponseModel,
+    APIDatabaseAnalysisRequestModel,
     DatabaseAnalysisCost,
     DatabaseAnalysisDataModel,
     DatabaseAnalysisDataType,
     DatabaseAnalysisRequirements,
-    DatabaseAnalysisVolume,
+    DatabaseAnalysisVolume, DatabaseAnalysisDataTypeEnum, BoolWithDescription, DatabaseAnalysisVolumeEnum,
 )
 
 router = APIRouter()
@@ -19,13 +19,13 @@ router = APIRouter()
 @router.post(
     "/technology_type/{technology_type}",
     response_description="Analysis project requirements and return result template",
-    response_model=APIDatabaseAnalysisResult,
+    response_model=APIDatabaseAnalysisResponseModel,
     status_code=200
 )
 def analysis_project_requirements(
     technology_type: int,
-    post_request: APIAnalysisPostRequest
-) -> APIDatabaseAnalysisResult:
+    post_request: APIDatabaseAnalysisRequestModel
+) -> APIDatabaseAnalysisResponseModel:
     """Analysis project requirements and return result template."""
     # if technology type is not database
     if technology_type != 1:
@@ -33,23 +33,45 @@ def analysis_project_requirements(
     logging.info("Database analysis process start")
     start_time = time.perf_counter()
     # TODO: implement analysis here
-    result = APIDatabaseAnalysisResult(
+    result = APIDatabaseAnalysisResponseModel(
         data_model=DatabaseAnalysisDataModel(
-            data_type=DatabaseAnalysisDataType.StringOrNumber,
-            structured_data=True,
-            time_series=True,
-            relationship_centric=True,
+            data_type=DatabaseAnalysisDataType(
+                value=DatabaseAnalysisDataTypeEnum.StringOrNumber,
+            ),
+            structured_data=BoolWithDescription(
+                value=True,
+            ),
+            time_series=BoolWithDescription(
+                value=True,
+            ),
+            relationship_centric=BoolWithDescription(
+                value=True,
+            ),
         ),
         requirements=DatabaseAnalysisRequirements(
-            volume=[DatabaseAnalysisVolume.SMALL],
-            query_patterns=True,
-            read=True,
-            write=True,
-            update=True,
-            availability=True,
+            volume=DatabaseAnalysisVolume(
+                value=[DatabaseAnalysisVolumeEnum.SMALL],
+            ),
+            query_patterns=BoolWithDescription(
+                value=False,
+            ),
+            read=BoolWithDescription(
+                value=None,
+            ),
+            write=BoolWithDescription(
+                value=False,
+            ),
+            update=BoolWithDescription(
+                value=False,
+            ),
+            availability=BoolWithDescription(
+                value=False,
+            ),
         ),
         cost=DatabaseAnalysisCost(
-            commercial_allow=True,
+            commercial_allow=BoolWithDescription(
+                value=False,
+            ),
         )
     )
     end_time = time.perf_counter()
