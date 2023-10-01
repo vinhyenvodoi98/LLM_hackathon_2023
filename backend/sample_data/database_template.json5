@@ -2,12 +2,22 @@
     "data_model": {
         "data_type": {
             // whether selected value can be multi or not
-            multi_choices: false,
+            multi_choices: true,
             // value that is accepted
             "accepted_values": [
+                // NOTE: for vector data type, vector database will be selected
+                // Vector database: FAISS, Deep Lake, ...
                 "Vector",
-                "StringOrNumber",
-                "FullText"
+                // NOTE: for SQL và NoSQL database, basic type of data will be:
+                // text, number, datatime, boolean, binary.
+                // Some will support storing objects.
+                // SQL and NoSQL database
+                "Text",
+                "Number",
+                "Datetime",
+                "Boolean",
+                "Binary",
+                "Objects" // complex data structures, such as JSON
             ],
             "description": "Which type of data that you want to save into your DB?"
         },
@@ -15,7 +25,7 @@
             // condition where this need to be asked
             "conditions": {
                 "data_model": {
-                    "data_type": ["StringOrNumber"]
+                    "data_type": ["Text", "Number", "Datetime", "Boolean", "Binary", "Objects"]
                 }
             },
             multi_choices: false,
@@ -23,12 +33,12 @@
                 true,
                 false
             ],
-            "description": "Is your data structured and normalized?"
+            "description": "Is your data structured?"
         },
         "time_series": {
             "conditions": {
                 "data_model": {
-                    "data_type": ["StringOrNumber"]
+                    "data_type": ["Text", "Number", "Datetime", "Boolean", "Binary", "Objects"]
                 }
             },
             multi_choices: false,
@@ -36,14 +46,9 @@
                 true,
                 false
             ],
-            "description": "Is your data time series?"
+            "description": "Time series data is a collection of observations obtained through repeated measurements over time. Is your data time series data?"
         },
         "relationship_centric": {
-            "conditions": {
-                "data_model": {
-                    "data_type": ["StringOrNumber"]
-                }
-            },
             multi_choices: false,
             "accepted_values": [
                 true,
@@ -55,18 +60,17 @@
     "requirements": {
         "volume":  {
             multi_choices: true,
-            // TODO: need to defined how much data is SMALL, MEDIUM or HIGH
             "accepted_values": [
                 "SMALL",
                 "MEDIUM",
                 "HIGH"
             ],
-            "description": "How much data do you need to store?"
+            "description": "How much data do you need to store? Less than 1 million records is SMALL. Within 1 million and 100 million is MEDIUM. And above 100 million records is HIGH."
         },
-        "query_patterns": {
+        "complex_query_patterns": {
             "conditions": {
                 "data_model": {
-                    "data_type": ["StringOrNumber"]
+                    "data_type": ["Text", "Number", "Datetime", "Boolean", "Binary", "Objects"]
                 }
             },
             multi_choices: false,
@@ -76,7 +80,7 @@
             ],
             "description": "Do you have to do a lot of complex queries?"
         },
-        "read": {
+        "read_consistency": {
             multi_choices: false,
             // consistency in CAD
             "accepted_values": [
@@ -85,35 +89,22 @@
             ],
             "description": "Is read consistency (any read request will return the most recent write) one of the most important requirements?"
         },
-        "write": {
+        "high_write_workloads": {
             multi_choices: false,
             "accepted_values": [
                 true,
                 false
             ],
-            "description": "Do you have to write data frequently?"
+            "description": "Do you have a high-write workloads?"
         },
-        "update": {
-            "conditions": {
-                "data_model": {
-                    "data_type": ["StringOrNumber", "FullText"]
-                }
-            },
-            multi_choices: false,
-            "accepted_values": [
-                true,
-                false
-            ],
-            "description": "Do you have to update existing data frequently?"
-        },
-        "availability": {
+        "high_availability": {
             multi_choices: false,
             // availability in CAD
             "accepted_values": [
                 true,
                 false
             ],
-            "description": "Can you accept less than 99% uptime for database?"
+            "description": "Can you accept less than 99.9% uptime for database?"
         }
     },
     "cost": {
@@ -123,7 +114,7 @@
                 true,
                 false
             ],
-            "description": "Are you willing to to use commercial database?"
+            "description": "Are you willing to pay some money to use commercial database?"
         }
     }
 }
