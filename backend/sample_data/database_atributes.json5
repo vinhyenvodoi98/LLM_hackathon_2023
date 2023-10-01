@@ -1,0 +1,26 @@
+{
+    index: 1,
+    "name": "MySQL",
+    "website": "https://www.mysql.com/",
+    "data_type": [
+        "Text",
+        "Number",
+        "Datetime",
+        "Boolean",
+        "Binary"
+    ],
+    "structured_data": true,
+    "time_series": false,
+    "relationship_centric": true,
+    "volume": [
+        "SMALL",
+        "MEDIUM",
+        "HIGH"
+    ],
+    "read_consistency": true,
+    "complex_query_patterns": true,
+    "high_write_workloads": false,
+    "high_availability": true,
+    "open_source": true,
+    "commercial": true
+}
