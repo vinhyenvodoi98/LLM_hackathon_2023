@@ -117,14 +117,13 @@
         }
     },
     "cost": {
-        "budget": {
+        "commercial_allow": {
             multi_choices: false,
             "accepted_values": [
-                "SMALL",
-                "MEDIUM",
-                "HIGH"
+                true,
+                false
             ],
-            "description": "How much is your budget for building and maintaining a database?"
+            "description": "Are you willing to to use commercial database?"
         }
     }
 }
