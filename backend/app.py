@@ -12,7 +12,7 @@ async def read_root():
 
 app.include_router(
     technology_router,
-    tags=["Technology"],
-    prefix="/technologies",
+    tags=["Technology Types"],
+    prefix="/technology_types",
     dependencies=[],
 )

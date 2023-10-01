@@ -1,4 +1,5 @@
-db_technologies = [
+# technology types of mock db
+db_technology_types = [
     {
         "index": 1,
         "name": "Database",
