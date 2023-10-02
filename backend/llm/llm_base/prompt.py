@@ -3,6 +3,7 @@ from langchain.chains import LLMChain
 from llm_base.palm_model import PalmModel
 
 class Prompt:
+
     prompt: PromptTemplate
 
     def __init__(self) -> None:
