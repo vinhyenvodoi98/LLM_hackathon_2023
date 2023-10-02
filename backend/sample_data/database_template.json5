@@ -61,11 +61,11 @@
         "volume":  {
             multi_choices: true,
             "accepted_values": [
-                "SMALL",
-                "MEDIUM",
-                "HIGH"
+                "small",
+                "medium",
+                "large"
             ],
-            "description": "How much data do you need to store? Less than 1 million records is SMALL. Within 1 million and 100 million is MEDIUM. And above 100 million records is HIGH."
+            "description": "How much data do you need to store? Less than 1 million records is small. Within 1 million and 100 million is medium. And above 100 million records is large."
         },
         "complex_query_patterns": {
             "conditions": {

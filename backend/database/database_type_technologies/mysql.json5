@@ -1,0 +1,59 @@
+{
+    index: 1,
+    "name": "MySQL",
+    "website": "https://www.mysql.com/",
+    "data_type": {
+        "question": "Which type of data can this database store?",
+        "answer": [
+            "Text",
+            "Number",
+            "Datetime",
+            "Boolean",
+            "Binary",
+        ]
+    },
+    "structured_data": {
+        "question": "Do this database store structured data?",
+        "answer": true
+    },
+    "time_series": {
+        "question": "Is this database suitable to store time series data?",
+        "answer": true
+    },
+    "relationship_centric": {
+        "question": "Is this database suitable to store data which have a lot of complicated relationship?",
+        "answer": true
+    },
+    "volume": {
+        "question": "How much data this database is suitable for? Less than 1 million records is SMALL. Within 1 million and 100 million is MEDIUM. And above 100 million records is HIGH.",
+        "answer": [
+            "small",
+            "medium",
+            "large"
+        ]
+    },
+    "read_consistency": {
+        "question": "Can this database guarantee that any read request will return the most recent write?",
+        "answer": true
+    },
+    "complex_query_patterns": {
+        "question": "Is this database efficient to do a lot of complex queries?",
+        "answer": true
+    },
+    "high_write_workloads": {
+        "question": "Can this database handle high-write workloads well?",
+        "answer": false
+    },
+    "high_availability": {
+        "question": "Can this database guarantee 99.9% uptime?",
+        "answer": true
+    },
+    "open_source": {
+        "question": "Do this database have open source version?",
+        "answer": true
+    },
+    "commercial": {
+        "question": "Do this database have commercial version?",
+        "answer": true
+    }
+}
