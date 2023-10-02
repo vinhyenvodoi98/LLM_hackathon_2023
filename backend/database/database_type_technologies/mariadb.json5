@@ -1,7 +1,7 @@
 {
-    "index": 2,
-    "name": "PostgreSQL",
-    "website": "https://www.postgresql.org/",
+    "index": 6,
+    "name": "MariaDB",
+    "website": "https://mariadb.org/",
     "data_type": {
         "question": "Which type of data can this database store?",
         "answer": [
@@ -43,7 +43,7 @@
     },
     "high_write_workloads": {
         "question": "Can this database handle high-write workloads well?",
-        "answer": false
+        "answer": true
     },
     "high_availability": {
         "question": "Can this database guarantee 99.9% uptime?",

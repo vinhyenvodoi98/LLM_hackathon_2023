@@ -1,7 +1,7 @@
 {
-    "index": 2,
-    "name": "PostgreSQL",
-    "website": "https://www.postgresql.org/",
+    "index": 4,
+    "name": "BigQuery",
+    "website": "https://cloud.google.com/bigquery/",
     "data_type": {
         "question": "Which type of data can this database store?",
         "answer": [
@@ -10,6 +10,7 @@
             "Datetime",
             "Boolean",
             "Binary",
+            "JSON",
             "Objects"
         ]
     },
@@ -28,8 +29,6 @@
     "volume": {
         "question": "How much data this database is suitable for? Less than 1 million records is small. Within 1 million and 100 million is medium. And above 100 million records is large.",
         "answer": [
-            "small",
-            "medium",
             "large"
         ]
     },
@@ -43,7 +42,7 @@
     },
     "high_write_workloads": {
         "question": "Can this database handle high-write workloads well?",
-        "answer": false
+        "answer": true
     },
     "high_availability": {
         "question": "Can this database guarantee 99.9% uptime?",
@@ -51,7 +50,7 @@
     },
     "open_source": {
         "question": "Do this database have open source version?",
-        "answer": true
+        "answer": false
     },
     "commercial": {
         "question": "Do this database have commercial version?",

@@ -1,5 +1,5 @@
 {
-    index: 1,
+    "index": 1,
     "name": "MySQL",
     "website": "https://www.mysql.com/",
     "data_type": {
@@ -9,7 +9,7 @@
             "Number",
             "Datetime",
             "Boolean",
-            "Binary",
+            "Binary"
         ]
     },
     "structured_data": {
@@ -18,14 +18,14 @@
     },
     "time_series": {
         "question": "Is this database suitable to store time series data?",
-        "answer": true
+        "answer": false
     },
     "relationship_centric": {
         "question": "Is this database suitable to store data which have a lot of complicated relationship?",
         "answer": true
     },
     "volume": {
-        "question": "How much data this database is suitable for? Less than 1 million records is SMALL. Within 1 million and 100 million is MEDIUM. And above 100 million records is HIGH.",
+        "question": "How much data this database is suitable for? Less than 1 million records is small. Within 1 million and 100 million is medium. And above 100 million records is large.",
         "answer": [
             "small",
             "medium",

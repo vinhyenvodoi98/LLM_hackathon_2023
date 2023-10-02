@@ -1,7 +1,7 @@
 {
-    "index": 2,
-    "name": "PostgreSQL",
-    "website": "https://www.postgresql.org/",
+    "index": 5,
+    "name": "Oracle Database",
+    "website": "https://www.oracle.com/database/",
     "data_type": {
         "question": "Which type of data can this database store?",
         "answer": [
@@ -43,7 +43,7 @@
     },
     "high_write_workloads": {
         "question": "Can this database handle high-write workloads well?",
-        "answer": false
+        "answer": true
     },
     "high_availability": {
         "question": "Can this database guarantee 99.9% uptime?",
@@ -51,7 +51,7 @@
     },
     "open_source": {
         "question": "Do this database have open source version?",
-        "answer": true
+        "answer": false
     },
     "commercial": {
         "question": "Do this database have commercial version?",
