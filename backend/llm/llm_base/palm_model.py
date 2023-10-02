@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from langchain.llms import GooglePalm
-from .config.palm_model_config import * 
+from config.palm_model_config import * 
 
 load_dotenv()
 

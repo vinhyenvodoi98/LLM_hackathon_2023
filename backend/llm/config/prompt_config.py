@@ -1,11 +1,14 @@
+#TODO: Need to test the use of Output Parser and see if the result can be well-formatted.
 requirement_analysis_prompt_config = {
     "context": "You are a veteran Database specialist and an experienced, detailed-oriented consultant. I need you to analyze the user's requirement and output the analyzed result in a JSON format. Put null values for information you don't know. You will have to explain for each property why you chose that value among its corresponding accepted values, in a detailed way that can convince the user.\n",
-    "template": """
+    "example_input_variables": ["requirement", "analysis_result"],
+    "example_template": """
         requirement: {requirement}
         analysis_result: {analysis_result},
     """,
     "prefix": "Here are some examples of requirement and its corresponding analysis result:\n\n",
     "suffix": "\n\nNow, given a new requirement, give me the analysis result:\nrequirement: {requirement}\nanalysis_result:",
+    "actual_input_variable": "requirement",
     "examples": [
         {
             "requirement": "Develop a comprehensive health and wellness tracking platform that integrates with wearable devices and mobile applications. The platform would collect and analyze data related to users' physical activity, sleep patterns, nutrition, and mental well-being. It could provide personalized insights, goal recommendations, and progress tracking to help users make informed decisions about their health. Additionally, it may include social features to encourage users to share achievements and support each other in their wellness journeys.",
@@ -20,4 +23,12 @@ requirement_analysis_prompt_config = {
             "analysis_result": "$\n    \"data_model\": $\n        \"data_type\": \"StringOrNumber\",\n        \"structured_data\": false,\n        \"time_series\": true,\n        \"relationship_centric\": true,\n    &,\n    \"requirements\": $\n        \"volume\": \"HIGH\",\n        \"read\": true,\n        \"write\": true,\n        \"update\": true,\n        \"availability\": true,\n    &,\n    \"cost\": $\n        \"commercial_allow\": null\n    &\n&\n\nThe explanation for this output is as follows: \n1. Data model\n- The data type value is StringOrNumber because you will store numbers such as temperature, humidity, power consumption, etc. \n- The structured data value is false because the data will not be stored in a traditional relational database format.\n- The time series value is true because the data will be collected over time.\n- The relationship centric value is true because the data will be connected to each other.\n2. Requirements\n- The volume value is HIGH because the amount of data will be large.\n- The read value is true because you will need to read the data to monitor the status of your home.\n- The write value is true because you will need to write the data to control your home.\n- The update value is true because you will need to update the data when the status of your home changes.\n- The availability value is true because the database must be available 24/7 so that you can monitor and control your home.\n3. Cost\n- The commercial allow value is null because you didn't mention anything regarding whether he wants to use an open-source DB or a commercial DB in the requirement\n"
         },
     ]
+}
+
+basic_prompt_example_config = {
+    "input_variable": "database",
+    "template": 
+        """You are a veteran Database specialist and an experienced, detailed-oriented consultant.
+            You will give a summary of this {database}'s features.
+        """
 }
