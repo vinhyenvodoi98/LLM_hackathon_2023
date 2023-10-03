@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TooltipIcon } from "./icon";
+import { TooltipIcon } from "./Icon";
 
 interface TooltipProps {
   text: string;

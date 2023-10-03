@@ -1,5 +1,5 @@
 import Checkbox from "./checkbox"
-import { ChatIcon } from "./icon";
+import { ChatIcon } from "./Icon";
 import Tooltip from "./tooltip";
 
 type CustomTableProps = {
