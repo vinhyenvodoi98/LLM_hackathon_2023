@@ -19,26 +19,15 @@
             ],
             "description": "Which type of data that you want to save into your DB?"
         },
-        "structured_data": {
-            // condition where this need to be asked
-            "conditions": {
-                "data_model": {
-                    "data_type": ["Text", "Number", "Datetime", "Boolean", "Binary", "Objects"]
-                }
-            },
+        "unstructured_data": {
             multi_choices: false,
             "accepted_values": [
                 true,
                 false
             ],
-            "description": "Is your data structured?"
+            "description": "Do your project contain unstructured data?"
         },
         "time_series": {
-            "conditions": {
-                "data_model": {
-                    "data_type": ["Text", "Number", "Datetime", "Boolean", "Binary", "Objects"]
-                }
-            },
             multi_choices: false,
             "accepted_values": [
                 true,
@@ -66,11 +55,6 @@
             "description": "How much data do you need to store? Less than 1 million records is small. Within 1 million and 100 million is medium. And above 100 million records is large."
         },
         "complex_query_patterns": {
-            "conditions": {
-                "data_model": {
-                    "data_type": ["Text", "Number", "Datetime", "Boolean", "Binary", "Objects"]
-                }
-            },
             multi_choices: false,
             "accepted_values": [
                 true,
