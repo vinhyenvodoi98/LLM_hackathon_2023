@@ -26,7 +26,3 @@ def load_database_type_technologies():
 
 
 db_database_type_technologies = load_database_type_technologies()
-
-
-if __name__ == '__main__':
-    pprint(db_database_type_technologies)

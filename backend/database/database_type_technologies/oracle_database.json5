@@ -10,20 +10,21 @@
             "Datetime",
             "Boolean",
             "Binary",
-            "Objects"
+            "JSON",
+            "XML"
         ]
     },
     "structured_data": {
-        "question": "Do this database store structured data?",
-        "answer": true
+        "question": "Do this database store unstructured data?",
+        "answer": false
     },
     "time_series": {
-        "question": "Is this database suitable to store time series data?",
-        "answer": true
+        "question": "On a scale of 1 to 5, how suitable is this database for storing time series data?",
+        "answer": 3
     },
     "relationship_centric": {
-        "question": "Is this database suitable to store data which have a lot of complicated relationship?",
-        "answer": true
+        "question": "On a scale of 0 to 5, how suitable is this database suitable for storing data which have a lot of complicated relationship?",
+        "answer": 5
     },
     "volume": {
         "question": "How much data this database is suitable for? Less than 1 million records is small. Within 1 million and 100 million is medium. And above 100 million records is large.",
@@ -34,16 +35,16 @@
         ]
     },
     "read_consistency": {
-        "question": "Can this database guarantee that any read request will return the most recent write?",
-        "answer": true
+        "question": "On a scale of 1 to 5, what is the read consistency of this database?",
+        "answer": 5
     },
     "complex_query_patterns": {
-        "question": "Is this database efficient to do a lot of complex queries?",
-        "answer": true
+        "question": "On a scale of 1 to 5, how good can this database handle a lot of complex queries?",
+        "answer": 5
     },
     "high_write_workloads": {
-        "question": "Can this database handle high-write workloads well?",
-        "answer": true
+        "question": "On a scale of 1 to 5, how good can this database high-write workloads?",
+        "answer": 3
     },
     "high_availability": {
         "question": "Can this database guarantee 99.9% uptime?",
