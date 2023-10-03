@@ -14,7 +14,8 @@
                 "Datetime",
                 "Boolean",
                 "Binary",
-                "Objects", // complex data structures, such as JSON
+                "JSON",
+                "XML"// complex data structures, such as JSON
             ],
             "description": "Which type of data that you want to save into your DB?"
         },
