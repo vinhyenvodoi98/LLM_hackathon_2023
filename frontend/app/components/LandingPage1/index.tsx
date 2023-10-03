@@ -1,4 +1,6 @@
-import { Button, ButtonOutline } from "../button";
+"use client"
+import Link from "next/link";
+import { Button } from "../button";
 import { LandingPageImage } from "./image";
 
 export default function LandingPage1() {
@@ -16,8 +18,11 @@ export default function LandingPage1() {
             consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
           </p>
           <div className="flex gap-4 py-4 justify-center sm:justify-start">
-            <Button text="Hoge" onClick={()=> console.log("test")}/>
-            <ButtonOutline text="Lumpoe" onClick={()=> console.log("test")}/>
+            <Link href="/app">
+              <div className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden rounded-lg bg-accent/60 hover:bg-accent shadow-md group">
+                Start
+              </div>
+            </Link>
           </div>
         </div>
       </div>
