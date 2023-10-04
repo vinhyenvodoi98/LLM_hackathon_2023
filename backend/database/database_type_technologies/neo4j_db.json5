@@ -14,7 +14,7 @@
       "JSON"
     ]
   },
-  "structured_data": {
+  "unstructured_data": {
     "question": "Do this database store unstructured data?",
     "answer": true
   },
