@@ -1,22 +1,20 @@
 'use client'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button, ButtonOutline } from "../components/button"
 import { CustomTable } from "../components/table"
+
+type TechRes = {
+  enable: boolean,
+  index: number,
+  name: string
+}
 
 export default function App() {
   const [step, setStep] = useState<number>(1)
   const [isAnalysisResult, setIsAnalysisResult] = useState<boolean>(false)
-
-  const techs = [{
-    key: "database",
-    title: "Database",
-  },{
-    key: "frontend",
-    title: "Front-end",
-  },{
-    key: "backend",
-    title: "Back-end",
-  }]
+  const [techs, setTechs] = useState<TechRes[]>([])
+  const [selectedTech, setSelectedTech] = useState<number>(0)
+  const [context, setContext] = useState<string>("")
 
   const titles= [{
       key: "name",
@@ -80,12 +78,14 @@ export default function App() {
     }
   ]
 
-  const handleSelectTech = async (tech:string) => {
+  const handleSelectTech = async (index:number) => {
     setStep(step + 1)
+    setSelectedTech(index)
   }
 
   const handleAnalize = async () => {
     setIsAnalysisResult(true)
+    sendAnalysis()
   }
 
   const handleSubmit = async () => {
@@ -102,7 +102,37 @@ export default function App() {
     });
     setRows(t)
   }
+  const fetchTechnologyTypes = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_HOST}/technology_types/`
+      );
+      const data = await response.json();
+      if (data.error) throw new Error(data.error);
+      setTechs(data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(() => {
+    fetchTechnologyTypes()
+  }, [])
 
+  const sendAnalysis = async () => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/analysis/technology_type/${selectedTech}`, {
+      method: "POST",
+      body: JSON.stringify({
+        context,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+    if (data.error) throw new Error(data.error);
+    console.log(data)
+  }
 
   return (
     <div className="bg-background text-text">
@@ -118,16 +148,22 @@ export default function App() {
         </div>
         <div className="flex gap-9">
           {techs.map(tech => (
-            <div onClick={()=>handleSelectTech(tech.key)} key={tech.key} className="p-8 rounded-xl w-52 text-center bg-secondary hover:bg-primary/70 cursor-pointer">
-              {tech.title}
-            </div>
+            <button disabled={!tech.enable} onClick={()=> handleSelectTech(tech.index)} key={tech.index} className={`p-8 relative rounded-xl w-52 text-center ${tech.enable ? 'bg-secondary hover:bg-primary/70 cursor-pointer': 'bg-[#CBD5E1]'}`}>
+              {!tech.enable && <div className="bg-[#F77373] rounded-lg absolute top-0 right-0 p-1 text-sm">Coming soon</div>}
+              {tech.name}
+            </button>
           ))}
         </div>
       </div>
       : step === 2 ?
       <div className="container min-h-main flex flex-col justify-center items-center">
         <div className="w-full flex justify-center h-56 ">
-          <textarea disabled={isAnalysisResult} id="message" className="w-1/2 h-40 block p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg outline outline-2 outline-primary" placeholder="Tell us about your project"></textarea>
+          <textarea
+            disabled={isAnalysisResult}
+            value={context}
+            onChange={(e)=> setContext(e.target.value)}
+            className="w-1/2 h-40 block p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg outline outline-2 outline-primary"
+            placeholder="Tell us about your project"/>
         </div>
         {isAnalysisResult ?
           <div className="">
