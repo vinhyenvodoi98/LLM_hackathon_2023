@@ -1,6 +1,8 @@
 import json
 import os
-from pprint import pprint
+from typing import List
+
+from database.database_type_technologies import all_data as all_database_type_technologies
 
 
 def remove_question_key(raw_db_attributes: dict) -> dict:
@@ -14,13 +16,12 @@ def remove_question_key(raw_db_attributes: dict) -> dict:
     return db_attributes
 
 
-def load_database_type_technologies():
-    database_type_technologies_dir = "database_type_technologies/"
-    technologies = []
-    for file_name in os.listdir(database_type_technologies_dir):
-        file_path = os.path.join(database_type_technologies_dir, file_name)
-        with open(file_path) as f:
-            technologies.append(remove_question_key(json.load(f)))
+def load_database_type_technologies() -> List[dict]:
+    # TODO: make dataclasses ???
+    technologies = [
+        remove_question_key(database_type_technology)
+        for database_type_technology in all_database_type_technologies
+    ]
     technologies.sort(key=lambda tech: tech["index"])
     return technologies
 
