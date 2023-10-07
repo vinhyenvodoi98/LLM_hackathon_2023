@@ -1,7 +1,7 @@
-{
-    "index": 9,
-    "name": "TimescaleDB",
-    "website": "https://www.timescale.com/",
+mariadb = {
+    "index": 6,
+    "name": "MariaDB",
+    "website": "https://mariadb.org/",
     "data_type": {
         "question": "Which type of data can this database store?",
         "answer": [
@@ -15,27 +15,28 @@
         ]
     },
     "unstructured_data": {
-        "question": "Do this database store unstructured data?",
+        "question": "Can this database store unstructured data?",
         "answer": false
     },
     "time_series": {
         "question": "On a scale of 1 to 5, how suitable is this database for storing time series data?",
-        "answer": 5
+        "answer": 3
     },
     "relationship_centric": {
         "question": "On a scale of 0 to 5, how suitable is this database suitable for storing data which have a lot of complicated relationship?",
-        "answer": 3
+        "answer": 4
     },
     "volume": {
         "question": "How much data this database is suitable for? Less than 1 million records is small. Within 1 million and 100 million is medium. And above 100 million records is large.",
         "answer": [
+            "small",
             "medium",
             "large"
         ]
     },
     "read_consistency": {
         "question": "On a scale of 1 to 5, what is the read consistency of this database?",
-        "answer": 5
+        "answer": 4
     },
     "complex_query_patterns": {
         "question": "On a scale of 1 to 5, how good can this database handle a lot of complex queries?",
@@ -43,7 +44,7 @@
     },
     "high_write_workloads": {
         "question": "On a scale of 1 to 5, how good can this database high-write workloads?",
-        "answer": 5
+        "answer": 3
     },
     "high_availability": {
         "question": "Can this database guarantee 99.9% uptime?",

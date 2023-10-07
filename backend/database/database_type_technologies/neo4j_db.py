@@ -1,4 +1,4 @@
-{
+neo4j_db = {
   "index": 13,
   "name": "Neo4j",
   "website": "https://neo4j.com/",
@@ -15,7 +15,7 @@
     ]
   },
   "unstructured_data": {
-    "question": "Do this database store unstructured data?",
+    "question": "Can this database store unstructured data?",
     "answer": true
   },
   "time_series": {

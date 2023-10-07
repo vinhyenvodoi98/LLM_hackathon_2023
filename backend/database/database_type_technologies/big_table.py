@@ -1,4 +1,4 @@
-{
+big_table = {
   "index": 14,
   "name": "Google Bigtable",
   "website": "https://cloud.google.com/bigtable/",
@@ -15,7 +15,7 @@
     ]
   },
   "unstructured_data": {
-    "question": "Do this database store unstructured data?",
+    "question": "Can this database store unstructured data?",
     "answer": true
   },
   "time_series": {

@@ -1,4 +1,4 @@
-{
+redis = {
     "index": 11,
     "name": "Redis",
     "website": "https://redis.io/",
@@ -15,7 +15,7 @@
         ]
     },
     "unstructured_data": {
-        "question": "Do this database store unstructured data?",
+        "question": "Can this database store unstructured data?",
         "answer": true
     },
     "time_series": {

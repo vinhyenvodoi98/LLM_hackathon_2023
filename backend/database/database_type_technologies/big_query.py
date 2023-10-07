@@ -1,7 +1,7 @@
-{
-    "index": 12,
-    "name": "DynamoDB",
-    "website": "https://aws.amazon.com/dynamodb/",
+big_query = {
+    "index": 4,
+    "name": "Google BigQuery",
+    "website": "https://cloud.google.com/bigquery",
     "data_type": {
         "question": "Which type of data can this database store?",
         "answer": [
@@ -15,32 +15,31 @@
         ]
     },
     "unstructured_data": {
-        "question": "Do this database store unstructured data?",
-        "answer": true
+        "question": "Can this database store unstructured data?",
+        "answer": false
     },
     "time_series": {
         "question": "On a scale of 1 to 5, how suitable is this database for storing time series data?",
-        "answer": 4
+        "answer": 5
     },
     "relationship_centric": {
-        "question": "On a scale of 1 to 5, how suitable is this database suitable for storing data which have a lot of complicated relationship?",
-        "answer": 2
+        "question": "On a scale of 0 to 5, how suitable is this database suitable for storing data which have a lot of complicated relationship?",
+        "answer": 5
     },
     "volume": {
         "question": "How much data this database is suitable for? Less than 1 million records is small. Within 1 million and 100 million is medium. And above 100 million records is large.",
         "answer": [
-            "small",
             "medium",
             "large"
         ]
     },
     "read_consistency": {
         "question": "On a scale of 1 to 5, what is the read consistency of this database?",
-        "answer": 4
+        "answer": 5
     },
     "complex_query_patterns": {
         "question": "On a scale of 1 to 5, how good can this database handle a lot of complex queries?",
-        "answer": 4
+        "answer": 5
     },
     "high_write_workloads": {
         "question": "On a scale of 1 to 5, how good can this database high-write workloads?",

@@ -1,4 +1,4 @@
-{
+microsoft_sql_server = {
     "index": 3,
     "name": "Microsoft SQL Server",
     "website": "https://www.microsoft.com/en-us/sql-server",
@@ -15,7 +15,7 @@
         ]
     },
     "unstructured_data": {
-        "question": "Do this database store unstructured data?",
+        "question": "Can this database store unstructured data?",
         "answer": false
     },
     "time_series": {

@@ -1,4 +1,4 @@
-{
+influxdb = {
     "index": 7,
     "name": "InfluxDB",
     "website": "https://www.influxdata.com/",
@@ -12,7 +12,7 @@
         ]
     },
     "unstructured_data": {
-        "question": "Do this database store unstructured data?",
+        "question": "Can this database store unstructured data?",
         "answer": false
     },
     "time_series": {
