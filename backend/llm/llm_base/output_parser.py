@@ -12,6 +12,6 @@ class OutputParser:
         print(correct_formatted_json_string[150:170])
         json_object = json.loads(correct_formatted_json_string)
         return json_object
-
+    
 
     
