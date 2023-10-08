@@ -25,3 +25,8 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+/* Class to adjust with sticky footer */
+.min-h-main {
+  @apply min-h-[calc(100vh-57px)];
+}
