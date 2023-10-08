@@ -34,5 +34,3 @@ class PalmModel:
             top_p=embedding_model["parameters"]["top_p"],
             google_api_key=GOOGLE_API_KEY
         )
-
-        
