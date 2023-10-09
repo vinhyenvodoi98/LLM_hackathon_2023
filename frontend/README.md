@@ -1,3 +1,14 @@
+# Run
+## Add env
+
+Copy file .env.example and rename to .env
+
+then 
+```
+cd ./frontend
+yarn
+yarn dev
+```
 # Setup color
 https://realtimecolors.com/
 
