@@ -1,6 +1,7 @@
 from langchain.prompts import PromptTemplate, FewShotPromptTemplate
 from langchain.chains import LLMChain
 from llm_base.palm_model import PalmModel
+import json
 
 class Prompt:
 
@@ -27,23 +28,37 @@ class Prompt:
 class FewShotPrompt(Prompt):
 
     def __init__(self, config, input: str) -> PromptTemplate:
+        parsed_config = self.__parse_config(config)
+
         example_prompt = PromptTemplate(
-            input_variables=config["example_input_variables"],
-            template=config["example_template"]
+            input_variables=parsed_config["example_input_variables"],
+            template=parsed_config["example_template"]
         )
 
         few_shot_prompt = FewShotPromptTemplate(
-            examples=config["examples"], 
+            examples=parsed_config["examples"], 
             example_prompt=example_prompt, 
-            prefix="\n".join([ config["context"], config["prefix"] ]),
-            suffix=config["suffix"], 
-            input_variables=[ config["actual_input_variable"] ],
+            prefix="\n".join([ parsed_config["context"], parsed_config["prefix"] ]),
+            suffix=parsed_config["suffix"], 
+            input_variables=[ parsed_config["actual_input_variable"] ],
         )
 
-        formatted_prompt = few_shot_prompt.format(**{ config["actual_input_variable"]: input })
+        formatted_prompt = few_shot_prompt.format(**{ parsed_config["actual_input_variable"]: input })
 
         self.prompt = PromptTemplate(template=formatted_prompt, input_variables=[])
-    
+
+    def __parse_config(self, config):
+        config["context"] = config["context"].replace("{", "$").replace("}", "&")
+        config["examples"] = [ 
+            {
+                "requirement": example["requirement"],
+                "analysis_result": json.dumps(example["analysis_result"]).replace("{", "$").replace("}", "&")
+            }
+            
+            for example in config["examples"] 
+        ]
+        # print(config["examples"][0])
+        return config    
     
 class BasicPrompt(Prompt):
 
