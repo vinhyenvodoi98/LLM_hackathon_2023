@@ -9,13 +9,13 @@
                 // text, number, datatime, boolean, binary.
                 // Some will support storing objects.
                 // SQL and NoSQL database
-                "text",
-                "number",
-                "datetime",
-                "boolean",
-                "binary",
-                "json",
-                "xml"
+                "Text",
+                "Number",
+                "Datetime",
+                "Boolean",
+                "Binary",
+                "JSON",
+                "XML"
             ],
             "description": "Which type of data that you want to save into your DB?"
         },
