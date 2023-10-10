@@ -58,7 +58,7 @@ class DatabaseTechnologiesSelector:
         # FIXME: hardcode
         # filter databases that contains all required data types
         required_data_types = analysis.data_type
-        satisfied_databases = []
+        dt_databases = []
         if required_data_types is None:
             satisfied_databases = databases
         else:
@@ -67,14 +67,15 @@ class DatabaseTechnologiesSelector:
                     data_types.value in database["data_type"]
                     for data_types in required_data_types
                 ):
-                    satisfied_databases.append(database)
+                    dt_databases.append(database)
         # filter by target data volume
         required_data_volume = analysis.volume
+        satisfied_databases = []
         if required_data_types is not None:
-            for database in databases:
+            for database in dt_databases:
                 if all(
-                    data_types in database["volume"]
-                    for data_types in required_data_volume
+                    volume.value in database["volume"]
+                    for volume in required_data_volume
                 ):
                     satisfied_databases.append(database)
 
