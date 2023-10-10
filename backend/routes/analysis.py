@@ -19,7 +19,7 @@ router = APIRouter()
 
 @router.post(
     "/technology_type/{technology_type}",
-    response_description="Analysis project requirements and return result template",
+    response_description="Analysis project requirements and return result factor by template",
     response_model=APIDatabaseAnalysisResponseModel,
     status_code=200
 )

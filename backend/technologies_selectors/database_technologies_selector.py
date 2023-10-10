@@ -1,7 +1,7 @@
 from typing import List
 
 from database import get_all_database_type_technologies
-from models.analysis.database_analysis import APIDatabaseAnalysisResponseModel
+from models.selecting import APIAnalysisRequestModel
 
 
 class DatabaseTechnologiesSelector:
@@ -19,7 +19,7 @@ class DatabaseTechnologiesSelector:
         ]
 
     def get_top_k_technologies(
-        self, analysis: APIDatabaseAnalysisResponseModel, k=3
+        self, analysis: APIAnalysisRequestModel, k=3
     ) -> List[dict]:
         """Get top k highest score technologies.
 
@@ -52,48 +52,49 @@ class DatabaseTechnologiesSelector:
 
     @staticmethod
     def filter_unsatisfied_technologies(
-        analysis: APIDatabaseAnalysisResponseModel, databases: List[dict]
+        analysis: APIAnalysisRequestModel, databases: List[dict]
     ) -> List[dict]:
         """."""
         # FIXME: hardcode
         # filter databases that contains all required data types
-        required_data_types = analysis.data_model.data_type.value
-        satisfied_databases = []
+        required_data_types = analysis.data_type
+        dt_databases = []
         if required_data_types is None:
             satisfied_databases = databases
         else:
             for database in databases:
                 if all(
-                    data_types in database["data_type"]
+                    data_types.value in database["data_type"]
                     for data_types in required_data_types
                 ):
-                    satisfied_databases.append(database)
+                    dt_databases.append(database)
         # filter by target data volume
-        required_data_volume = analysis.requirements.volume.value
+        required_data_volume = analysis.volume
+        satisfied_databases = []
         if required_data_types is not None:
-            for database in databases:
+            for database in dt_databases:
                 if all(
-                    data_types in database["volume"]
-                    for data_types in required_data_volume
+                    volume.value in database["volume"]
+                    for volume in required_data_volume
                 ):
                     satisfied_databases.append(database)
 
         # filter databases by unstructured data compatibility
-        if analysis.data_model.unstructured_data:
+        if analysis.unstructured_data:
             satisfied_databases = [
                 database
                 for database in satisfied_databases
                 if database["unstructured_data"]
             ]
         # filter by high_availability, open_source, commercial
-        if analysis.requirements.high_availability:
+        if analysis.high_availability:
             satisfied_databases = [
                 database
                 for database in satisfied_databases
                 if database["high_availability"]
             ]
         # filter by open source only
-        if not analysis.requirements.commercial_allow and analysis.requirements.commercial_allow is not None:
+        if not analysis.commercial_allow and analysis.commercial_allow is not None:
             satisfied_databases = [
                 database
                 for database in satisfied_databases
@@ -102,7 +103,7 @@ class DatabaseTechnologiesSelector:
 
         return satisfied_databases
 
-    def calculate_scores(self, analysis: APIDatabaseAnalysisResponseModel, databases: List[dict]):
+    def calculate_scores(self, analysis: APIAnalysisRequestModel, databases: List[dict]):
         """Calculate score for each database for ranking."""
         # scores = [ {index: int, score: float} ]
         # TODO: dataclass

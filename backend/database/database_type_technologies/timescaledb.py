@@ -16,7 +16,7 @@ timescaledb = {
     },
     "unstructured_data": {
         "question": "Can this database store unstructured data?",
-        "answer": false
+        "answer": False
     },
     "time_series": {
         "question": "On a scale of 1 to 5, how suitable is this database for storing time series data?",
@@ -47,14 +47,14 @@ timescaledb = {
     },
     "high_availability": {
         "question": "Can this database guarantee 99.9% uptime?",
-        "answer": true
+        "answer": True
     },
     "open_source": {
         "question": "Do this database have open source version?",
-        "answer": true
+        "answer": True
     },
     "commercial": {
         "question": "Do this database have commercial version?",
-        "answer": true
+        "answer": True
     }
 }

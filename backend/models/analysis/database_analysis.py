@@ -22,13 +22,13 @@ class APIDatabaseAnalysisRequestModel(BaseModel):
 
 class DatabaseAnalysisDataTypeEnum(Enum):
     """Type of database data type."""
-    TEXT = "text"
-    NUMBER = "number"
-    DATETIME = "datetime"
-    BOOLEAN = "boolean"
-    BINARY = "binary"
-    JSON = "json"
-    XML = "xml"
+    TEXT = "Text"
+    NUMBER = "Number"
+    DATETIME = "Datetime"
+    BOOLEAN = "Boolean"
+    BINARY = "Binary"
+    JSON = "JSON"
+    XML = "XML"
 
 
 class DatabaseAnalysisDataType(BaseModel):
@@ -86,17 +86,7 @@ class BoolWithDescription(BaseModel):
         }
 
 
-class CustomBaseModel(BaseModel):
-    """Base model with custom function."""
-    def get_value_from_field(self, field: str):
-        """Get value."""
-        for key, value_obj in self.__dict__.items():
-            if field == key:
-                return value_obj.value
-        return None
-
-
-class DatabaseAnalysisDataModel(CustomBaseModel):
+class DatabaseAnalysisDataModel(BaseModel):
     """Project analysis result for data model."""
     data_type: DatabaseAnalysisDataType
     unstructured_data: BoolWithDescription
@@ -128,7 +118,7 @@ class DatabaseAnalysisDataModel(CustomBaseModel):
         }
 
 
-class DatabaseAnalysisRequirements(CustomBaseModel):
+class DatabaseAnalysisRequirements(BaseModel):
     """Project analysis result for requirement."""
     volume: DatabaseAnalysisVolume
     complex_query_patterns: BoolWithDescription
@@ -168,7 +158,7 @@ class DatabaseAnalysisRequirements(CustomBaseModel):
         }
 
 
-class DatabaseAnalysisCost(CustomBaseModel):
+class DatabaseAnalysisCost(BaseModel):
     """Project analysis result for cost."""
     commercial_allow: BoolWithDescription
 
@@ -189,17 +179,6 @@ class APIDatabaseAnalysisResponseModel(BaseModel):
     data_model: DatabaseAnalysisDataModel
     requirements: DatabaseAnalysisRequirements
     cost: DatabaseAnalysisCost
-
-    def get_value_from_field(self, field: str):
-        """Get value."""
-        value = self.data_model.get_value_from_field(field)
-        if value is not None:
-            return value
-        value = self.requirements.get_value_from_field(field)
-        if value is not None:
-            return value
-        value = self.cost.get_value_from_field(field)
-        return value
 
     class Config:
         json_schema_extra = {

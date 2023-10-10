@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from routes.technology import router as technology_router
 from routes.analysis import router as analysis_router
+from routes.selecting import router as selecting_router
 
 app = FastAPI()
 
@@ -37,5 +38,13 @@ app.include_router(
     analysis_router,
     tags=["Analysis"],
     prefix="/analysis",
+    dependencies=[],
+)
+
+
+app.include_router(
+    selecting_router,
+    tags=["Selecting"],
+    prefix="/selecting",
     dependencies=[],
 )
