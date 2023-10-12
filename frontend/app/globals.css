@@ -28,5 +28,5 @@ body {
 
 /* Class to adjust with sticky footer */
 .min-h-main {
-  @apply min-h-[calc(100vh-57px)];
+  @apply min-h-[calc(100vh-100px)];
 }

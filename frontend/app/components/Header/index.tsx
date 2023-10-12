@@ -1,11 +1,17 @@
-import Link from "next/link"
+import Link from 'next/link';
+
+import Wallet from '@/components/Providers/wallet';
 
 export default function Header() {
   return (
-    <header className='sticky top-0 z-50 bg-background border-b'>
-      <div className='container flex h-14 items-center justify-between'>
-        <Link href="/">Home</Link>
+    <div className='z-10 p-4 sticky top-0 bg-background'>
+      <div className='navbar shadow-xl rounded-box border'>
+        <div className='flex-1'>
+          <Link href='/' className='btn btn-ghost normal-case text-xl'>
+            Home
+          </Link>
+        </div>
       </div>
-    </header>
+    </div>
   );
 }
