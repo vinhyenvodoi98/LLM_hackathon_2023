@@ -21,9 +21,7 @@
                 true,
                 false
             ],
-            // TODO: the new question seem to be easy to answer, but how about the accuracy
-            // "description": "Do your project contain unstructured data?",
-            "description": "Do your project have to change the structure of the data regularly?"
+            "description": "Do your project contain unstructured data?",
         },
         "time_series": {
             multi_choices: false,
