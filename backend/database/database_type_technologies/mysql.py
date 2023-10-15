@@ -16,44 +16,54 @@ mysql = {
         "question": "Can this database store unstructured data?",
         "answer": False
     },
-    "time_series": {
-        "question": "On a scale of 1 to 5, how suitable is this database for storing time series data?",
-        "answer": 2
+    "small_volume": {
+        "sql": {
+            "question": "On a scale of 0 to 10, how suitable is MySQL for storing a small set of SQL data?",
+            "answer": 9
+        },
+        "time_series": {
+            "question": "On a scale of 0 to 10, how suitable is MySQL for storing a small set of time series data?",
+            "answer": 8
+        },
     },
-    "relationship_centric": {
-        "question": "On a scale of 0 to 5, how suitable is this database suitable for storing data which have a lot of complicated relationship?",
-        "answer": 4
+    "medium_volume": {
+        "sql": {
+            "question": "On a scale of 0 to 10, how suitable is MySQL for storing a medium set of SQL data?",
+            "answer": 7
+        },
+        "time_series": {
+            "question": "On a scale of 0 to 10, how suitable is MySQL for storing a medium set of time series data?",
+            "answer": 6
+        },
     },
-    "volume": {
-        "question": "How much data this database is suitable for? Less than 1 million records is small. Within 1 million and 100 million is medium. And above 100 million records is large.",
-        "answer": [
-            "small",
-            "medium",
-            "large"
-        ]
+    "large_volume": {
+        "sql": {
+            "question": "On a scale of 0 to 10, how suitable is MySQL for storing a large set of SQL data?",
+            "answer": 5
+        },
+        "time_series": {
+            "question": "On a scale of 0 to 10, how suitable is MySQL for storing a large set of time series data?",
+            "answer": 4
+        },
     },
     "read_consistency": {
-        "question": "On a scale of 1 to 5, what is the read consistency of this database?",
-        "answer": 4
-    },
-    "complex_query_patterns": {
-        "question": "On a scale of 1 to 5, how good can this database handle a lot of complex queries?",
-        "answer": 3
+        "question": "On a scale of 0 to 10, what is the read consistency of MySQL?",
+        "answer": 7
     },
     "high_write_workloads": {
-        "question": "On a scale of 1 to 5, how good can this database high-write workloads?",
-        "answer": 1
+        "question": "On a scale of 0 to 10, how good can MySQL handle high-write workloads?",
+        "answer": 7
     },
-    "high_availability": {
-        "question": "Can this database guarantee 99.9% uptime?",
-        "answer": True
+    "maturity": {
+        "question": "On a scale of 0 to 10, how mature is MySQL?",
+        "answer": 9
     },
     "open_source": {
-        "question": "Do this database have open source version?",
+        "question": "Do MySQL have open source version?",
         "answer": True
     },
     "commercial": {
-        "question": "Do this database have commercial version?",
+        "question": "Do MySQL have commercial version?",
         "answer": True
     }
 }
