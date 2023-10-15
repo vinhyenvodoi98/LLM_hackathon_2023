@@ -13,3 +13,21 @@ all_data = [
     mariadb, timescaledb, microsoft_sql_server,
     amazon_aurora, cloud_sql, firestore
 ]
+
+general_purpose_sql = [
+    mysql, postgresql, tidb,
+    mariadb, microsoft_sql_server,
+    amazon_aurora, cloud_sql
+]
+
+general_purpose_no_sql = [
+    firestore
+]
+
+time_series = [
+    timescaledb
+]
+
+in_memory = [
+
+]
