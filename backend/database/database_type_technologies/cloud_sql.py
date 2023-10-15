@@ -15,7 +15,7 @@ cloud_sql = {
     },
     "unstructured_data": {
         "question": "Can this database store unstructured data?",
-        "answer": True
+        "answer": False
     },
     "small_volume": {
         "sql": {
