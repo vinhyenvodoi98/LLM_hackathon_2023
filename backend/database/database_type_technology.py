@@ -1,6 +1,7 @@
 from typing import List
 
-from database.database_type_technologies import all_data
+from database.database_type_technologies import all_data, general_purpose_sql, time_series, in_memory, \
+    general_purpose_no_sql
 
 
 def remove_question_key(raw_db_attributes: dict) -> dict:
@@ -27,4 +28,8 @@ def load_database_type_technologies(all_technologies) -> List[dict]:
     return technologies
 
 
-db_database_type_technologies = load_database_type_technologies(all_data)
+all_database_technologies = load_database_type_technologies(all_data)
+general_purpose_sql_database_technologies = load_database_type_technologies(general_purpose_sql)
+general_purpose_no_sql_database_technologies = load_database_type_technologies(general_purpose_no_sql)
+time_series_database_technologies = load_database_type_technologies(time_series)
+in_memory_database_technologies = load_database_type_technologies(in_memory)
