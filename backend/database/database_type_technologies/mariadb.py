@@ -1,5 +1,5 @@
 mariadb = {
-    "index": 6,
+    "index": 4,
     "name": "MariaDB",
     "website": "https://mariadb.org/",
     "data_type": {
@@ -9,53 +9,61 @@ mariadb = {
             "Number",
             "Datetime",
             "Boolean",
-            "Binary",
-            "JSON",
-            "XML"
+            "Binary"
         ]
     },
     "unstructured_data": {
         "question": "Can this database store unstructured data?",
         "answer": False
     },
-    "time_series": {
-        "question": "On a scale of 1 to 5, how suitable is this database for storing time series data?",
-        "answer": 3
+    "small_volume": {
+        "sql": {
+            "question": "On a scale of 0 to 10, how suitable is MariaDB for storing a small set of SQL data?",
+            "answer": 10
+        },
+        "time_series": {
+            "question": "On a scale of 0 to 10, how suitable is MariaDB for storing a small set of time series data?",
+            "answer": 9
+        },
     },
-    "relationship_centric": {
-        "question": "On a scale of 0 to 5, how suitable is this database suitable for storing data which have a lot of complicated relationship?",
-        "answer": 4
+    "medium_volume": {
+        "sql": {
+            "question": "On a scale of 0 to 10, how suitable is MariaDB for storing a medium set of SQL data?",
+            "answer": 9
+        },
+        "time_series": {
+            "question": "On a scale of 0 to 10, how suitable is MariaDB for storing a medium set of time series data?",
+            "answer": 8
+        },
     },
-    "volume": {
-        "question": "How much data this database is suitable for? Less than 1 million records is small. Within 1 million and 100 million is medium. And above 100 million records is large.",
-        "answer": [
-            "small",
-            "medium",
-            "large"
-        ]
+    "large_volume": {
+        "sql": {
+            "question": "On a scale of 0 to 10, how suitable is MariaDB for storing a large set of SQL data?",
+            "answer": 8
+        },
+        "time_series": {
+            "question": "On a scale of 0 to 10, how suitable is MariaDB for storing a large set of time series data?",
+            "answer": 7
+        },
     },
     "read_consistency": {
-        "question": "On a scale of 1 to 5, what is the read consistency of this database?",
-        "answer": 4
-    },
-    "complex_query_patterns": {
-        "question": "On a scale of 1 to 5, how good can this database handle a lot of complex queries?",
-        "answer": 3
+        "question": "On a scale of 0 to 10, what is the read consistency of MariaDB?",
+        "answer": 7
     },
     "high_write_workloads": {
-        "question": "On a scale of 1 to 5, how good can this database high-write workloads?",
-        "answer": 3
+        "question": "On a scale of 0 to 10, how good can MariaDB handle high-write workloads?",
+        "answer": 7
     },
-    "high_availability": {
-        "question": "Can this database guarantee 99.9% uptime?",
-        "answer": True
+    "maturity": {
+        "question": "On a scale of 0 to 10, how mature is MariaDB?",
+        "answer": 9
     },
     "open_source": {
-        "question": "Do this database have open source version?",
+        "question": "Do MariaDB have open source version?",
         "answer": True
     },
     "commercial": {
-        "question": "Do this database have commercial version?",
+        "question": "Do MariaDB have commercial version?",
         "answer": True
     }
 }

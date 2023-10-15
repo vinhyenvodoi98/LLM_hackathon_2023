@@ -1,7 +1,7 @@
 microsoft_sql_server = {
-    "index": 3,
+    "index": 6,
     "name": "Microsoft SQL Server",
-    "website": "https://www.microsoft.com/en-us/sql-server",
+    "website": "https://www.microsoft.com/sql-server/",
     "data_type": {
         "question": "Which type of data can this database store?",
         "answer": [
@@ -16,46 +16,56 @@ microsoft_sql_server = {
     },
     "unstructured_data": {
         "question": "Can this database store unstructured data?",
-        "answer": False
-    },
-    "time_series": {
-        "question": "On a scale of 1 to 5, how suitable is this database for storing time series data?",
-        "answer": 3
-    },
-    "relationship_centric": {
-        "question": "On a scale of 0 to 5, how suitable is this database suitable for storing data which have a lot of complicated relationship?",
-        "answer": 5
-    },
-    "volume": {
-        "question": "How much data this database is suitable for? Less than 1 million records is small. Within 1 million and 100 million is medium. And above 100 million records is large.",
-        "answer": [
-            "small",
-            "medium",
-            "large"
-        ]
-    },
-    "read_consistency": {
-        "question": "On a scale of 1 to 5, what is the read consistency of this database?",
-        "answer": 5
-    },
-    "complex_query_patterns": {
-        "question": "On a scale of 1 to 5, how good can this database handle a lot of complex queries?",
-        "answer": 5
-    },
-    "high_write_workloads": {
-        "question": "On a scale of 1 to 5, how good can this database high-write workloads?",
-        "answer": 3
-    },
-    "high_availability": {
-        "question": "Can this database guarantee 99.9% uptime?",
         "answer": True
     },
+    "small_volume": {
+        "sql": {
+            "question": "On a scale of 0 to 10, how suitable is Microsoft SQL Server for storing a small set of SQL data?",
+            "answer": 9
+        },
+        "time_series": {
+            "question": "On a scale of 0 to 10, how suitable is Microsoft SQL Server for storing a small set of time series data?",
+            "answer": 8
+        },
+    },
+    "medium_volume": {
+        "sql": {
+            "question": "On a scale of 0 to 10, how suitable is Microsoft SQL Server for storing a medium set of SQL data?",
+            "answer": 8
+        },
+        "time_series": {
+            "question": "On a scale of 0 to 10, how suitable is Microsoft SQL Server for storing a medium set of time series data?",
+            "answer": 7
+        },
+    },
+    "large_volume": {
+        "sql": {
+            "question": "On a scale of 0 to 10, how suitable is Microsoft SQL Server for storing a large set of SQL data?",
+            "answer": 7
+        },
+        "time_series": {
+            "question": "On a scale of 0 to 10, how suitable is Microsoft SQL Server for storing a large set of time series data?",
+            "answer": 6
+        },
+    },
+    "read_consistency": {
+        "question": "On a scale of 0 to 10, what is the read consistency of Microsoft SQL Server?",
+        "answer": 9
+    },
+    "high_write_workloads": {
+        "question": "On a scale of 0 to 10, how good can Microsoft SQL Server handle high-write workloads?",
+        "answer": 8
+    },
+    "maturity": {
+        "question": "On a scale of 0 to 10, how mature is Microsoft SQL Server?",
+        "answer": 10
+    },
     "open_source": {
-        "question": "Do this database have open source version?",
+        "question": "Do Microsoft SQL Server have open source version?",
         "answer": False
     },
     "commercial": {
-        "question": "Do this database have commercial version?",
+        "question": "Do Microsoft SQL Server have commercial version?",
         "answer": True
     }
 }
