@@ -1,7 +1,5 @@
 import Link from 'next/link';
 
-import Wallet from '@/components/Providers/wallet';
-
 export default function Header() {
   return (
     <div className='z-10 p-4 sticky top-0 bg-background'>
