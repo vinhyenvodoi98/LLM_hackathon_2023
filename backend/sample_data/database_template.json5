@@ -5,10 +5,6 @@
             multi_choices: true,
             // value that is accepted
             "accepted_values": [
-                // NOTE: for SQL và NoSQL database, basic type of data will be:
-                // text, number, datatime, boolean, binary.
-                // Some will support storing objects.
-                // SQL and NoSQL database
                 "Text",
                 "Number",
                 "Datetime",
@@ -25,7 +21,7 @@
                 true,
                 false
             ],
-            "description": "Do your project contain unstructured data?"
+            "description": "Do your project contain unstructured data?",
         },
         "time_series": {
             multi_choices: false,
@@ -35,14 +31,6 @@
             ],
             "description": "Time series data is a collection of observations obtained through repeated measurements over time. Is your data time series data?"
         },
-        "relationship_centric": {
-            multi_choices: false,
-            "accepted_values": [
-                true,
-                false
-            ],
-            "description": "Do you have a lot of complicated relationship between data?"
-        }
     },
     "requirements": {
         "volume":  {
@@ -54,13 +42,13 @@
             ],
             "description": "How much data do you need to store? Less than 1 million records is small. Within 1 million and 100 million is medium. And above 100 million records is large."
         },
-        "complex_query_patterns": {
+        "fast_response_time": {
             multi_choices: false,
             "accepted_values": [
                 true,
                 false
             ],
-            "description": "Do you have to do a lot of complex queries?"
+            "description": "Do your project require microsecond response time from database? For example, leaderboards or session store may requires it."
         },
         "read_consistency": {
             multi_choices: false,
@@ -78,15 +66,6 @@
                 false
             ],
             "description": "Do you have a high-write workloads?"
-        },
-        "high_availability": {
-            multi_choices: false,
-            // availability in CAD
-            "accepted_values": [
-                true,
-                false
-            ],
-            "description": "Can you accept less than 99.9% uptime for database?"
         }
     },
     "cost": {
@@ -96,7 +75,7 @@
                 true,
                 false
             ],
-            "description": "Are you willing to pay some money to use commercial database?"
+            "description": "Are you willing to use commercial database?"
         }
     }
 }
