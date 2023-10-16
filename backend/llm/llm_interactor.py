@@ -1,10 +1,12 @@
+from backend.models.analysis.database_analysis import APIDatabaseAnalysisResponseModel
 from llm_base.prompt import FewShotPrompt, BasicPrompt
 from llm_base.output_parser import OutputParser
 from config.prompt_config import *
 
 def get_requirement_analysis_result(input: str) -> str:
     prompt = FewShotPrompt(requirement_analysis_prompt_config, input)
-    result = prompt.get_result_with_text_model()
+    analysis_result = prompt.get_result_with_text_model()
+    result = OutputParser.json_extract(analysis_result)
 
     return result
 
