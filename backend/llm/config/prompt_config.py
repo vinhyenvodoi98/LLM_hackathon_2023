@@ -15,30 +15,26 @@ requirement_analysis_prompt_config = {
             "analysis_result": {
                 "data_model": {
                     "data_type": {
-                        "value": ["text", "number", "datetime", "boolean", "binary"],
+                        "value": ["Text", "Number", "Datetime", "Boolean", "Binary"],
                         "reason": 'The choice of "Text" data type is used for storing textual information like usernames, goals, session names, etc. "Number" is used for storing numerical data, such as user IDs, session durations, and progress metrics. "Datetime" is used to capture timestamps for various events. "Boolean" is used for binary indicators like the status of reminders or goal achievements. "Binary" is used for storing audio files or images.',
                     },
                     "unstructured_data": {
-                        "value": True,
+                        "value": False,
                         "reason": "The data that will be mainly stored would be structured data, such as User Profiles, Progress Tracking, Goals and Preferences, Reminders, and Metadata of media files which will be likely to store in a separate storage.",
                     },
                     "time_series": {
                         "value": True,
                         "reason": " The need to track and analyze changes over time in features like progress tracking, reminders, and insights strongly suggests that the app would benefit from storing time-series data in its database. This allows the app to offer personalized insights and recommendations based on the user's historical data.",
                     },
-                    "relationship_centric": {
-                        "value": False,
-                        "reason": "While there are relationships between different types of data, these relationships appear to be relatively straightforward and not excessively complex. Users have preferences and goals, and their interactions with features like progress tracking and reminders contribute to generating insights. The app's data model may involve linking various data entities, but it doesn't inherently suggest a need for highly intricate relationships that would make the database structure excessively complicated.",
-                    },
                 },
                 "requirements": {
                     "volume": {
-                        "value": "medium",
+                        "value": None,
                         "reason": 'Given that the app includes features like progress tracking, reminders, and potentially generates insights, the data volume could fall within the "medium" category, ranging from 1 million to 100 million records. This is a just a general estimate and actual usage patterns, and user engagement would play a crucial role in determining the actual scale of data storage.',
                     },
-                    "complex_query_patterns": {
+                    "fast_response_time": {
                         "value": False,
-                        "reason": "For a standard implementation of progress tracking, reminders, and content retrieval, the queries may not need to be excessively complex. However, if the app aims to provide highly personalized and detailed insights, more sophisticated queries may be necessary.",
+                        "reason": "Users typically engage in mindfulness and meditation exercises over more extended periods, and they don't expect real-time, split-second. The data is not complex or real-time required. It primarily includes user preferences, meditation session data, and progress tracking. These data types don't require microsecond response times.",
                     },
                     "read_consistency": {
                         "value": False,
@@ -47,10 +43,6 @@ requirement_analysis_prompt_config = {
                     "high_write_workloads": {
                         "value": True,
                         "reason": "While the app may not have an extremely high level of write workload compared to some other types of applications, there is likely a moderate write workload associated with features like progress tracking, reminders, and content personalization. If users can regularly log their progress, such as the duration and frequency of meditation sessions, this could contribute to a moderate level of write workload. If users actively set and modify reminders for mindfulness breaks, there could be write operations associated with updating reminder schedules. If users can personalize their library by adding or removing content, this could contribute to a write workload. Additionally, if there are dynamic recommendations or updates to the library based on user preferences, this might involve more frequent writes.",
-                    },
-                    "high_availability": {
-                        "value": False,
-                        "reason": "Considering that read consistency is not a critical requirement and write workload is rather moderate, we can assume that a less than 99.9% uptime is tolerable. The users are not expected to use the app frequently during a day and the amount of possible loss data during the downtime is not significant.",
                     },
                 },
                 "cost": {
@@ -67,12 +59,12 @@ requirement_analysis_prompt_config = {
                 "data_model": {
                     "data_type": {
                         "value": [
-                            "text",
-                            "number",
-                            "datetime",
-                            "boolean",
-                            "binary",
-                            "json",
+                            "Text",
+                            "Number",
+                            "Datetime",
+                            "Boolean",
+                            "Binary",
+                            "JSON",
                         ],
                         "reason": "The choice of data types is based on the following considerations:\n\nText: This data type is suitable for storing textual information such as user names, item descriptions, and categories.\n\nNumber: This data type is suitable for storing numeric information such as user ratings, item quantities, and prices.\n\nDatetime: This data type is suitable for storing timestamps, such as when an item was listed or when a swap was completed.\n\nBoolean: This data type is suitable for storing binary values such as whether an item is available or whether a user has been verified.\n\nBinary: This data type is suitable for storing images of items.\n\nJSON: This data type is suitable for storing complex data structures such as user profiles and item details.",
                     },
@@ -84,19 +76,15 @@ requirement_analysis_prompt_config = {
                         "value": False,
                         "reason": "The data that will be stored in the EcoSwap database is not time-series data. While there may be some temporal aspects to the data, such as when items are listed or when swaps are completed, these are not the primary focus of the database.",
                     },
-                    "relationship_centric": {
-                        "value": True,
-                        "reason": "The data that will be stored in the EcoSwap database is relationship-centric. The relationships between users, items, and swaps are essential to the functioning of the platform. For example, users can only swap items with other users, and items can only be swapped if they are available.",
-                    },
                 },
                 "requirements": {
                     "volume": {
                         "value": "medium",
                         "reason": "The EcoSwap platform is likely to have a medium amount of data. The number of users and items on the platform is likely to be in the hundreds of thousands or millions. The amount of data generated by user interactions, such as swaps and ratings, is also likely to be significant.",
                     },
-                    "complex_query_patterns": {
-                        "value": True,
-                        "reason": "The EcoSwap platform is likely to require complex query patterns. For example, users may want to search for items based on multiple criteria, such as category, location, and condition. The platform may also need to generate reports on user activity and item swaps.",
+                    "fast_response_time": {
+                        "value": False,
+                        "reason": "The data involved in a platform like EcoSwap primarily includes user profiles, item listings, and user interactions. While there may be a substantial amount of data, it's not real-time data, and millisecond or sub-millisecond response times should be sufficient to manage user accounts, item listings, and search functionalities.",
                     },
                     "read_consistency": {
                         "value": False,
@@ -105,10 +93,6 @@ requirement_analysis_prompt_config = {
                     "high_write_workloads": {
                         "value": False,
                         "reason": "It seems that the application may not inherently have a high write workload. The EcoSwap platform is not likely to have high write workloads. The majority of user interactions on the platform will be read operations, such as searching for items and viewing swap details. Write operations, such as creating new items and swaps, are likely to be less frequent.",
-                    },
-                    "high_availability": {
-                        "value": False,
-                        "reason": "The need for high availability may not be as critical compared to certain real-time or mission-critical applications. The act of listing items on the platform and searching for items may not require real-time availability. Users might engage with the platform at their convenience, and delays in availability might not significantly impact the overall user experience. While users may interact with each other through the platform, the nature of item swapping and the lack of immediate financial transactions may mean that the platform can tolerate brief periods of unavailability without severe consequences. Access to educational resources on sustainable living and reducing environmental impact is unlikely to be highly time sensitive. Users may visit these resources at their own pace. ",
                     },
                 },
                 "cost": {
@@ -124,7 +108,13 @@ requirement_analysis_prompt_config = {
             "analysis_result": {
                 "data_model": {
                     "data_type": {
-                        "value": ["text", "number", "datetime", "boolean", "json"],
+                        "value": [
+                            "Text",
+                            "Number",
+                            "Datetime",
+                            "Boolean",
+                            "JSON",
+                        ],
                         "reason": "The choice of data types is based on the following considerations:\n\nText: This data type is suitable for storing textual information such as user names, account names, and transaction descriptions.\n\nNumber: This data type is suitable for storing numeric information such as account balances, transaction amounts, and financial goals.\n\nDatetime: This data type is suitable for storing timestamps, such as when transactions occur or when financial goals are set.\n\nBoolean: This data type is suitable for storing binary values such as whether a transaction is recurring or whether a financial goal has been achieved.\n\nJSON: This data type is suitable for storing complex data structures such as user profiles and financial transactions.",
                     },
                     "unstructured_data": {
@@ -135,19 +125,15 @@ requirement_analysis_prompt_config = {
                         "value": True,
                         "reason": "The data that will be stored in the MoneyMinds database is time-series data. The transactions and financial goals are all associated with specific dates, and the user's financial situation will change over time. The database will need to be able to store and track these changes over time.",
                     },
-                    "relationship_centric": {
-                        "value": True,
-                        "reason": "The data that will be stored in the MoneyMinds database is relationship-centric. The relationships between users, accounts, transactions, and financial goals are essential to the functioning of the application. For example, users can only view the transactions for their own accounts, and transactions can only be associated with one account.",
-                    },
                 },
                 "requirements": {
                     "volume": {
                         "value": "large",
                         "reason": "The MoneyMinds application is likely to have a large amount of data. The number of users and transactions is likely to be in the millions or billions. The amount of data generated by user interactions, such as creating budgets and setting financial goals, is also likely to be significant.",
                     },
-                    "complex_query_patterns": {
+                    "fast_response_time": {
                         "value": True,
-                        "reason": "The MoneyMinds application is likely to require complex query patterns. For example, users may want to see a list of all their transactions for a given month, or they may want to see a breakdown of their spending by category. The application may also need to generate reports on user activity and financial progress.",
+                        "reason": "It seems that the tracking investment function needs microsecond data return time. While real-time stock prices may not be necessary, data related to investment portfolios and asset allocation should be updated with minimal latency to provide accurate insights.",
                     },
                     "read_consistency": {
                         "value": True,
@@ -156,10 +142,6 @@ requirement_analysis_prompt_config = {
                     "high_write_workloads": {
                         "value": True,
                         "reason": "The MoneyMinds application is likely to have high write workloads. Users will be constantly adding new transactions and updating their financial goals. The application will need to be able to handle these writes quickly and efficiently.",
-                    },
-                    "high_availability": {
-                        "value": True,
-                        "reason": "High availability is likely to be an important requirement for the MoneyMinds application. Users need to be able to access their financial information at any time, even if the application is experiencing technical difficulties. The application will need to be able to tolerate failures and recover quickly.",
                     },
                 },
                 "cost": {
@@ -175,7 +157,13 @@ requirement_analysis_prompt_config = {
             "analysis_result": {
                 "data_model": {
                     "data_type": {
-                        "value": ["text", "number", "datetime", "boolean", "json"],
+                        "value": [
+                            "Text",
+                            "Number",
+                            "Datetime",
+                            "Boolean",
+                            "JSON",
+                        ],
                         "reason": "The choice of data types is based on the following considerations:\n\nText: This data type is suitable for storing textual information such as user names, addresses, and descriptions of government services.\n\nNumber: This data type is suitable for storing numeric information such as license numbers, tax amounts, and population statistics.\n\nDatetime: This data type is suitable for storing timestamps, such as when a license was issued or when a tax payment was made.\n\nBoolean: This data type is suitable for storing binary values such as whether a user has paid their taxes or whether a government agency is open.\n\nJSON: This data type is suitable for storing complex data structures such as user profiles and government agency information.",
                     },
                     "unstructured_data": {
@@ -186,19 +174,15 @@ requirement_analysis_prompt_config = {
                         "value": False,
                         "reason": "The data that will be stored in the CitizenConnect database is not time-series data. The functionalities described in CitizenConnect seem more aligned with providing static or dynamically updated information at a given point in time, rather than recording and analyzing data changes over specific intervals.",
                     },
-                    "relationship_centric": {
-                        "value": True,
-                        "reason": "The data that will be stored in the CitizenConnect database is relationship-centric. The relationships between users, government agencies, and government services are essential to the functioning of the platform. For example, users can only access certain services if they are registered with the government agency that provides those services.",
-                    },
                 },
                 "requirements": {
                     "volume": {
                         "value": "large",
                         "reason": "The CitizenConnect platform is likely to have a large amount of data. The number of users and government agencies is likely to be in the millions or billions. The amount of data generated by user interactions, such as renewing licenses and paying taxes, is also likely to be significant.",
                     },
-                    "complex_query_patterns": {
+                    "fast_response_time": {
                         "value": True,
-                        "reason": "The CitizenConnect platform is likely to require complex query patterns. For example, users may want to search for a specific government service or find out about all the services that are available in their area. The platform may also need to generate reports on user activity and government agency performance.",
+                        "reason": "Citizens usually interact with government platforms in a less time-sensitive manner, such as adhering to annual deadlines or specific timelines set by government agencies. While timely access to government policies, local initiatives, and updates is important, the content delivery itself does not typically require microsecond response times. Citizens expect accurate and up-to-date information, but they don't expect the same real-time responsiveness as in, for example, high-frequency trading platforms.",
                     },
                     "read_consistency": {
                         "value": True,
@@ -208,15 +192,54 @@ requirement_analysis_prompt_config = {
                         "value": True,
                         "reason": "The CitizenConnect platform is likely to have high write workloads. Users will be constantly interacting with the platform, such as renewing licenses and paying taxes. The platform will need to be able to handle these writes quickly and efficiently.",
                     },
-                    "high_availability": {
-                        "value": True,
-                        "reason": "High availability is likely to be an important requirement for the CitizenConnect platform. The application is meant to provide access to essential government services such as renewing licenses and paying taxes. Users may rely on these services for critical transactions, making high availability crucial to ensure users can access them when needed. Citizens need to stay informed about local initiatives and policies, requiring access to real-time or timely updates. High availability ensures that users can access the latest information promptly. The platform aims for seamless interaction between citizens and government agencies. High availability is essential to maintain a positive user experience and trust in the platform's reliability.",
-                    },
                 },
                 "cost": {
                     "commercial_allow": {
                         "value": True,
                         "reason": "For a government website CitizenConnect, where security, scalability, and regulatory compliance are paramount, a commercial database may be the more suitable choice. However, the budget constraints, and the expertise of your development team should all be taken into account when making this decision.",
+                    }
+                },
+            },
+        },
+        {
+            "requirement": "I want to develop a website that provides spot trading services and price forecasts of tokens in the crypto field. The system will collect information about the price of 2000 tokens at each of the following time points: 5 minutes, 15 minutes, 30 minutes, 1 hour, 4 hours, 1 day, 1 week, 1 month. The system will then store this data in the database for analysis and prediction. Users can buy and sell tokens listed on this website. The system needs to update the latest information accurately every time. I want to use a quality database and have the least possible risk of disruption.",
+            "analysis_result": {
+                "data_model": {
+                    "data_type": {
+                        "value": ["text", "number", "datetime", "boolean", "json"],
+                        "reason": "The choice of data types is based on the following considerations:\n\nText: This data type is suitable for storing textual information such as token names, symbols, and descriptions.\n\nNumber: This data type is suitable for storing numeric information such as token prices, volumes, and market capitalizations.\n\nDatetime: This data type is suitable for storing timestamps, such as when a token price was updated.\n\nBoolean: This data type is suitable for storing binary values such as whether a token is tradable or not.\n\nJSON: This data type is suitable for storing complex data structures such as order books and trade histories.",
+                    },
+                    "unstructured_data": {
+                        "value": False,
+                        "reason": "The data that will be stored in the database is mostly structured, such as token prices, volumes, and market capitalizations. There is no mention of unstructured data such as images or videos.",
+                    },
+                    "time_series": {
+                        "value": True,
+                        "reason": "The data that will be stored in the database is time-series data. The token prices will be updated at regular intervals, and the system will need to be able to store and analyze this data over time.",
+                    },
+                },
+                "requirements": {
+                    "volume": {
+                        "value": "large",
+                        "reason": "The system will need to store a large amount of data. The token prices will be updated at regular intervals, and the system will need to store this data for analysis and prediction. Additionally, the system will need to store user data such as account balances and order histories.",
+                    },
+                    "fast_response_time": {
+                        "value": True,
+                        "reason": "Cryptocurrency markets are highly volatile and operate around the clock. The system needs to collect and update price information in real time to provide accurate and up-to-date data for analysis. Delays in data collection and storage can result in outdated information and hinder prediction accuracy.",
+                    },
+                    "read_consistency": {
+                        "value": True,
+                        "reason": "Read consistency is important for this system because users need to be able to see the latest token prices and make informed trading decisions.",
+                    },
+                    "high_write_workloads": {
+                        "value": True,
+                        "reason": "The system will have a high write workload because the token prices will be updated at regular intervals. Additionally, users will be able to buy and sell tokens, which will also generate write operations.",
+                    },
+                },
+                "cost": {
+                    "commercial_allow": {
+                        "value": True,
+                        "reason": "A commercial database is likely to be the best choice for this system. Commercial databases are typically more reliable and scalable than open-source databases. Additionally, commercial databases offer a wider range of features and support options.",
                     }
                 },
             },

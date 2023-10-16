@@ -7,12 +7,12 @@ from pydantic import BaseModel
 
 class APIDatabaseAnalysisRequestModel(BaseModel):
     """Project analysis post request."""
-    context: str
+    requirement: str
 
     class Config:
         json_schema_extra = {
             "example": {
-                "context": f"My project is an IoT project "
+                "requirement": f"My project is an IoT project "
                            f"which uses sensors to record the value of outdoor temperature, humidity "
                            f"and then display it on a dashboard. "
                            f"The dashboard should allow data export and graph customization."
@@ -32,17 +32,14 @@ class DatabaseAnalysisDataTypeEnum(Enum):
 
 
 class DatabaseAnalysisDataType(BaseModel):
-    question: str = "How much data do you need to store? " \
-                    "Less than 1 million records is small. " \
-                    "Within 1 million and 100 million is medium. " \
-                    "And above 100 million records is large."
+    question: str = "Which type of data that you want to save into your DB?"
     explanation: Optional[str] = ""
     value: List[DatabaseAnalysisDataTypeEnum]
 
     class Config:
         json_schema_extra = {
             "question": "Question that the system analyzed",
-            "value": ["text"],
+            "value": ["Text"],
             "explanation": "Explain why does the system suggest this value?"
         }
 
@@ -54,7 +51,7 @@ class DatabaseAnalysisVolumeEnum(Enum):
     # more than 1M records, less than 100M records
     MEDIUM = "medium"
     # more than 100M records
-    HIGH = "high"
+    LARGE = "large"
 
 
 class DatabaseAnalysisVolume(BaseModel):
@@ -91,7 +88,6 @@ class DatabaseAnalysisDataModel(BaseModel):
     data_type: DatabaseAnalysisDataType
     unstructured_data: BoolWithDescription
     time_series: BoolWithDescription
-    relationship_centric: BoolWithDescription
 
     class Config:
         json_schema_extra = {
@@ -110,21 +106,15 @@ class DatabaseAnalysisDataModel(BaseModel):
                 "value": None,
                 "explanation": "Explain why does the system suggest this value?"
             },
-            "relationship_centric": {
-                "question": "Question that the system analyzed",
-                "value": False,
-                "explanation": "Explain why does the system suggest this value?"
-            }
         }
 
 
 class DatabaseAnalysisRequirements(BaseModel):
     """Project analysis result for requirement."""
     volume: DatabaseAnalysisVolume
-    complex_query_patterns: BoolWithDescription
+    fast_response_time: BoolWithDescription
     read_consistency: BoolWithDescription
     high_write_workloads: BoolWithDescription
-    high_availability: BoolWithDescription
 
     class Config:
         json_schema_extra = {
@@ -134,7 +124,7 @@ class DatabaseAnalysisRequirements(BaseModel):
                     "value": ["small", "medium"],
                     "explanation": "Explain why does the system suggest this value?"
                 },
-                "complex_query_patterns": {
+                "fast_response_time": {
                     "question": "Question that the system analyzed",
                     "value": True,
                     "explanation": "Explain why does the system suggest this value?"
@@ -147,11 +137,6 @@ class DatabaseAnalysisRequirements(BaseModel):
                 "high_write_workloads": {
                     "question": "Question that the system analyzed",
                     "value": None,
-                    "explanation": "Explain why does the system suggest this value?"
-                },
-                "high_availability": {
-                    "question": "Question that the system analyzed",
-                    "value": True,
                     "explanation": "Explain why does the system suggest this value?"
                 },
             }
@@ -189,7 +174,7 @@ class APIDatabaseAnalysisResponseModel(BaseModel):
                         "value": ["text", "number", "datetime"],
                         "explanation": "Explain why does the system suggest this value?"
                     },
-                    "structured_data": {
+                    "unstructured_data": {
                         "question": "Question that the system analyzed",
                         "value": True,
                         "explanation": "Explain why does the system suggest this value?"
@@ -199,11 +184,6 @@ class APIDatabaseAnalysisResponseModel(BaseModel):
                         "value": None,
                         "explanation": "Explain why does the system suggest this value?"
                     },
-                    "relationship_centric": {
-                        "question": "Question that the system analyzed",
-                        "value": False,
-                        "explanation": "Explain why does the system suggest this value?"
-                    }
                 },
                 "requirements": {
                     "volume": {
@@ -211,7 +191,7 @@ class APIDatabaseAnalysisResponseModel(BaseModel):
                         "value": ["small", "medium"],
                         "explanation": "Explain why does the system suggest this value?"
                     },
-                    "complex_query_patterns": {
+                    "fast_response_time": {
                         "question": "Question that the system analyzed",
                         "value": True,
                         "explanation": "Explain why does the system suggest this value?"
@@ -224,11 +204,6 @@ class APIDatabaseAnalysisResponseModel(BaseModel):
                     "high_write_workloads": {
                         "question": "Question that the system analyzed",
                         "value": None,
-                        "explanation": "Explain why does the system suggest this value?"
-                    },
-                    "high_availability": {
-                        "question": "Question that the system analyzed",
-                        "value": True,
                         "explanation": "Explain why does the system suggest this value?"
                     },
                 },
