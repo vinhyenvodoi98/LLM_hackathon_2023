@@ -5,15 +5,13 @@ redis = {
   "data_type": {
     "question": "Which type of data can this database store?",
     "answer": [
-      "Strings",
-      "Lists",
-      "Sets",
-      "Hashes",
-      "Sorted sets",
-      "Bitmaps",
-      "HyperLogLogs",
-      "Geospatial indexes",
-      "Streams"
+        "Text",
+        "Number",
+        "Datetime",
+        "Boolean",
+        "Binary",
+        "JSON",
+        "XML"
     ]
   },
   "unstructured_data": {

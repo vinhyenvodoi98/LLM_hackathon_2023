@@ -1,4 +1,5 @@
 from enum import Enum
+from pprint import pprint
 from typing import List, Optional
 
 from dataclasses import dataclass
@@ -76,13 +77,31 @@ class DatabaseTechnologiesSelector:
         print(f"primary_db_score: {primary_db_score}")
         # secondary
         secondary_db_list = database_type.get_secondary_database_list()
-        if secondary_db_list is None:
-            return []
+        if secondary_db_list is None or len(primary_db_list) > k:
+            top_k_indexes = [
+                db_score["index"]
+                for db_score in primary_db_score[:k]
+            ]
+            return [
+                db
+                for db in primary_db_list
+                if db["index"] in top_k_indexes
+            ]
+
         secondary_db_list = self.remove_unsatisfied_technologies(analysis, secondary_db_list)
         secondary_db_score = self.calculate_scores(analysis, secondary_db_list)
         secondary_db_score = sorted(secondary_db_score, key=lambda database_score: database_score["score"], reverse=True)
+        top_k_indexes = [
+            db_score["index"]
+            for db_score in secondary_db_score[:(k-len(primary_db_list))]
+        ]
+        secondary_db_candidates = [
+            db
+            for db in secondary_db_list
+            if db["index"] in top_k_indexes
+        ]
         print(f"secondary_db_score: {secondary_db_score}")
-        return []
+        return [*primary_db_list, *secondary_db_candidates]
 
     def get_database_type(self, analysis: APIAnalysisRequestModel) -> DatabaseType:
         """Get the most suitable database type."""
@@ -177,12 +196,12 @@ if __name__ == '__main__':
             DatabaseAnalysisDataTypeEnum.TEXT,
             DatabaseAnalysisDataTypeEnum.NUMBER
         ],
-        unstructured_data=True,
-        time_series=True,
+        unstructured_data=False,
+        time_series=False,
         volume=[DatabaseAnalysisVolumeEnum.MEDIUM, DatabaseAnalysisVolumeEnum.HIGH],
-        fast_response_time=False,
+        fast_response_time=True,
         read_consistency=True,
         high_write_workloads=True,
-        commercial_allow=False
+        commercial_allow=True
     )
-    selector.get_top_k_technologies(analysis)
+    pprint(selector.get_top_k_technologies(analysis))
