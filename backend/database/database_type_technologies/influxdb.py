@@ -5,7 +5,12 @@ influxdb = {
     "data_type": {
         "question": "Which type of data can this database store?",
         "answer": [
-        "Time series data"
+            "Text",
+            "Number",
+            "Datetime",
+            "Boolean",
+            "Binary",
+            "JSON"
         ]
     },
     "unstructured_data": {
@@ -14,20 +19,20 @@ influxdb = {
     },
     "small_volume": {
         "time_series": {
-        "question": "On a scale of 0 to 10, how suitable is InfluxDB for storing a small set of time series data?",
-        "answer": 10
+            "question": "On a scale of 0 to 10, how suitable is InfluxDB for storing a small set of time series data?",
+            "answer": 10
         }
     },
     "medium_volume": {
         "time_series": {
-        "question": "On a scale of 0 to 10, how suitable is InfluxDB for storing a medium set of time series data?",
-        "answer": 9
+            "question": "On a scale of 0 to 10, how suitable is InfluxDB for storing a medium set of time series data?",
+            "answer": 9
         }
     },
     "large_volume": {
         "time_series": {
-        "question": "On a scale of 0 to 10, how suitable is InfluxDB for storing a large set of time series data?",
-        "answer": 8
+            "question": "On a scale of 0 to 10, how suitable is InfluxDB for storing a large set of time series data?",
+            "answer": 8
         }
     },
     "read_consistency": {
