@@ -12,12 +12,10 @@ class APIAnalysisRequestModel(BaseModel):
     data_type: List[DatabaseAnalysisDataTypeEnum]
     unstructured_data: Optional[bool]
     time_series: Optional[bool]
-    relationship_centric: Optional[bool]
     volume: List[DatabaseAnalysisVolumeEnum]
-    complex_query_patterns: Optional[bool]
+    fast_response_time: Optional[bool]
     read_consistency: Optional[bool]
     high_write_workloads: Optional[bool]
-    high_availability: Optional[bool]
     commercial_allow: Optional[bool]
 
     def get_value_from_field(self, field: str):
@@ -33,12 +31,10 @@ class APIAnalysisRequestModel(BaseModel):
             "data_type": ["Text", "Number"],
             "unstructured_data": True,
             "time_series": False,
-            "relationship_centric": True,
             "volume": ["small"],
-            "complex_query_patterns": False,
+            "fast_response_time": False,
             "read_consistency": True,
             "high_write_workloads": True,
-            "high_availability": True,
             "commercial_allow": True
         }
 
@@ -58,12 +54,10 @@ class APISelectingRequestModel(BaseModel):
                     "data_type": ["Text", "Number"],
                     "unstructured_data": True,
                     "time_series": False,
-                    "relationship_centric": True,
                     "volume": ["small"],
-                    "complex_query_patterns": False,
+                    "fast_response_time": False,
                     "read_consistency": True,
                     "high_write_workloads": True,
-                    "high_availability": True,
                     "commercial_allow": True
                 }
             }
