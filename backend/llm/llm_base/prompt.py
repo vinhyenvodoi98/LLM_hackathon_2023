@@ -1,7 +1,9 @@
 from langchain.prompts import PromptTemplate, FewShotPromptTemplate
 from langchain.chains import LLMChain
-from llm_base.palm_model import PalmModel
 import json
+
+from llm.llm_base.palm_model import PalmModel
+
 
 class Prompt:
 

@@ -1,7 +1,7 @@
 import logging
 import os
 import time
-from backend.llm.llm_interactor import get_requirement_analysis_result
+from llm.llm_interactor import get_requirement_analysis_result
 
 from fastapi import APIRouter
 
@@ -34,7 +34,7 @@ def analysis_project_requirements(
         raise NotImplementedError("App only support db analysis for now.")
     logging.info("Database analysis process start")
     start_time = time.perf_counter()
-    if os.getenv('BACKEND_DATA') == "MOCK":
+    if os.environ.get('BACKEND_DATA') == "MOCK":
         result = APIDatabaseAnalysisResponseModel(
             data_model=DatabaseAnalysisDataModel(
                 data_type=DatabaseAnalysisDataType(
@@ -87,7 +87,6 @@ def analysis_project_requirements(
             )
         )
     else:
-        # TODO: implement analysis here
         analysis_result = get_requirement_analysis_result(post_request.requirement)
         result = APIDatabaseAnalysisResponseModel(
             data_model=DatabaseAnalysisDataModel(
@@ -111,7 +110,7 @@ def analysis_project_requirements(
                 volume=DatabaseAnalysisVolume(
                     question="How much data do you need to store? Less than 1 million records is small. Within 1 million and 100 million is medium. And above 100 million records is large.",
                     explanation=analysis_result["requirements"]["volume"]["reason"],
-                    value=analysis_result["requirements"]["volume"]["value"],
+                    value=DatabaseAnalysisVolume.get_values(analysis_result["requirements"]["volume"]["value"]),
                 ),
                 fast_response_time=BoolWithDescription(
                     question="Do your project require microsecond response time from database? For example, leaderboards or session store may requires it.",

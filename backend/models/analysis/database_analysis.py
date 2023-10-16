@@ -69,6 +69,12 @@ class DatabaseAnalysisVolume(BaseModel):
             "explanation": "Explain why does the system suggest this value?"
         }
 
+    @staticmethod
+    def get_values(prompt_values) -> List[DatabaseAnalysisVolumeEnum]:
+        if prompt_values is None:
+            return []
+        return prompt_values
+
 
 class BoolWithDescription(BaseModel):
     question: str
