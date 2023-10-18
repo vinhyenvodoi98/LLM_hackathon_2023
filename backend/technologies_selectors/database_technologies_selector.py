@@ -170,13 +170,12 @@ class DatabaseTechnologiesSelector:
             score = 0
             score += database["read_consistency"] if analysis.read_consistency else (database["read_consistency"] * 0.5)
             score += database["high_write_workloads"] if analysis.high_write_workloads else (database["high_write_workloads"] * 0.5)
-            for target_volume in analysis.volume:
-                if target_volume == DatabaseAnalysisVolumeEnum.SMALL:
-                    score += database["small_volume"][volume_key]
-                if target_volume == DatabaseAnalysisVolumeEnum.MEDIUM:
-                    score += database["small_volume"][volume_key]
-                if target_volume == DatabaseAnalysisVolumeEnum.LARGE:
-                    score += database["large_volume"][volume_key]
+            if analysis.volume == DatabaseAnalysisVolumeEnum.SMALL:
+                score += database["small_volume"][volume_key]
+            if analysis.volume == DatabaseAnalysisVolumeEnum.MEDIUM:
+                score += database["small_volume"][volume_key]
+            if analysis.volume == DatabaseAnalysisVolumeEnum.LARGE:
+                score += database["large_volume"][volume_key]
             score *= (database["maturity"] / 10)
             scores.append(
                 {

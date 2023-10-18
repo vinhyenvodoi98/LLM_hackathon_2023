@@ -8,7 +8,7 @@ from llm.config.prompt_config import *
 
 def get_requirement_analysis_result(project_context: str) -> str:
     prompt = FewShotPrompt(requirement_analysis_prompt_config, project_context)
-    analysis_result = prompt.get_result_with_text_model()
+    analysis_result = prompt.get_result_with_text_model(temperature=0.5)
     result = OutputParser.json_extract(analysis_result)
 
     return result
@@ -21,7 +21,7 @@ def get_selecting_analysis_result(
     question_str = json.dumps(questions)
     prompt_input = f"Databases: {', '.join(database_names)}\nAspects:\n{question_str}"
     prompt = SelectingFewShotPrompt(selecting_prompt_config, prompt_input)
-    analysis_result = prompt.get_result_with_text_model()
+    analysis_result = prompt.get_result_with_text_model(temperature=0.2)
     result = OutputParser.json_array_extract(analysis_result)
 
     return result
