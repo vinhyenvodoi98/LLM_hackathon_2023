@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { Button, ButtonOutline } from "@/app/components/button"
 import { CustomTable } from "@/app/components/table"
 import Step from "@/app/components/Step"
+import Loading from "./components/loading"
 
 type TechRes = {
   enable: boolean,
@@ -16,68 +17,9 @@ export default function App() {
   const [techs, setTechs] = useState<TechRes[]>([])
   const [selectedTech, setSelectedTech] = useState<number>(0)
   const [context, setContext] = useState<string>("")
-
-  const titles= [{
-      key: "name",
-      title: "Field name"
-    },{
-      key: "value",
-      title: "Value"
-    },{
-      key: "consult",
-      title: "Consult"
-    },{
-      key: "explain",
-      title: "Explain"
-    }]
-
-  const [rows, setRows] = useState([{
-      name: "timeSeries",
-      value: false,
-      consult: "",
-      explain: "abc"
-    },{
-      name: "intensiveDataInsertion",
-      value: false,
-      consult: "",
-      explain: "abc"
-    },{
-      name: "hugeDataStorage",
-      value: false,
-      consult: "",
-      explain: "abc"
-    }])
-
-  const resultTitles= [{
-    key: "name",
-    title: "Field name"
-  },{
-    key: "xxxdb",
-    title: "xxxDB"
-  },{
-    key: "aaadb",
-    title: "xxxdb"
-  }]
-
-  const resultRows= [
-    {
-      name: "timeSeries",
-      xxxdb: "abco",
-      aaadb: "abco",
-    },{
-      name: "intensiveDataInsertion",
-      xxxdb: "abco",
-      aaadb: "abco",
-    },{
-      name: "complexQueries",
-      xxxdb: "abco",
-      aaadb: "abco",
-    },{
-      name: "hugeDataStorage",
-      xxxdb: "abco",
-      aaadb: "abco",
-    }
-  ]
+  const [isLoading, setIsLoading] = useState(false)
+  const [analysis, setAnalysis] = useState<any>({})
+  const [submitAnalysis, setSubmitAnalysis] = useState<any>({})
 
   const steps = [{
     title: "Select Techs",
@@ -101,18 +43,27 @@ export default function App() {
   }
 
   const handleSubmit = async () => {
-    setStep(step + 1)
+    setIsLoading(true)
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/analysis/technology_type/${selectedTech}`, {
+        method: "POST",
+        body: JSON.stringify({
+          analysis: submitAnalysis,
+          context: context,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      console.log(data)
+      setIsLoading(false)
+    } catch (error) {
+      console.log(error)
+      setIsLoading(false)
+    }
   }
 
-  const handleCheckbox = (title:string, value:boolean) => {
-    const t = rows.map(row => {
-      if (row.name === title) {
-        return { ...row, value: value };
-      }
-      return row;
-    });
-    setRows(t)
-  }
   const fetchTechnologyTypes = async () => {
     try {
       const response = await fetch(
@@ -125,30 +76,46 @@ export default function App() {
       console.log(error)
     }
   }
+
   useEffect(() => {
     fetchTechnologyTypes()
   }, [])
 
-  const sendAnalysis = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/analysis/technology_type/${selectedTech}`, {
-      method: "POST",
-      body: JSON.stringify({
-        context,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  useEffect(() => {
+    if(isLoading && document !== null) {
+      document.getElementById('loading-modal').showModal()
+    } else {
+      document.getElementById('loading-modal').close()
+    }
+  }, [isLoading])
 
-    const data = await response.json();
-    if (data.error) throw new Error(data.error);
-    console.log(data)
+  const sendAnalysis = async () => {
+    setIsLoading(true)
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/analysis/technology_type/${selectedTech}`, {
+        method: "POST",
+        body: JSON.stringify({
+          requirement: context,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      console.log(data)
+      setAnalysis(data)
+      setIsLoading(false)
+    } catch (error) {
+      console.log(error)
+      setIsLoading(false)
+    }
   }
 
   return (
-    <div className="text-text">
-      <div className='grid grid-cols-4 gap-8 p-4'>
-        <div className='rounded-box border col-span-4 p-8 flex justify-center'>
+    <div className="text-text min-h-main p-4">
+      {<Loading />}
+      <div className='grid grid-cols-4 gap-8 p-4 bg-[#F3F6FB] rounded-box min-h-main-component overflow-auto'>
+        <div className='h-32 rounded-box bg-[#FFFFFF] col-span-4 p-8 flex justify-center'>
           <Step current={step-1} steps={steps}/>
         </div>
         <div className='rounded-box col-span-4 py-12'>
@@ -162,31 +129,32 @@ export default function App() {
                 We will give you the most suitable choice
               </p>
             </div>
-            <div className="flex gap-9">
+            <div className="flex gap-14">
               {techs.map(tech => (
-                <button disabled={!tech.enable} onClick={()=> handleSelectTech(tech.index)} key={tech.index} className={`p-8 relative border rounded-xl w-52 text-center ${tech.enable ? 'bg-[#d5e8c5] hover:bg-[#89bd65]/70 cursor-pointer': 'bg-[#CBD5E1]'}`}>
-                  {!tech.enable && <div className="bg-[#F77373] rounded-lg absolute top-0 right-0 p-1 text-sm">Coming soon</div>}
-                  {tech.name}
+                <button disabled={!tech.enable} onClick={()=> handleSelectTech(tech.index)} key={tech.index} className={`p-8 indicator relative border rounded-xl w-52 text-center ${tech.enable ? 'bg-[#D3E2FD]/70 hover:bg-[#D3E2FD] cursor-pointer': 'bg-[#F2F2F2]'}`}>
+                  {!tech.enable &&
+                    <span className="indicator-item badge badge-secondary">Coming soon</span>
+                  }
+                  <div className="m-auto place-items-center">{tech.name}</div>
                 </button>
               ))}
             </div>
           </div>
           : step === 2 ?
           <div className="container flex flex-col justify-center items-center">
-            <p className="py-4 text-xl sm:text-base">
+            <h1 className="text-xl sm:text-2xl font-bold mb-8">
               Tell me more about your project
-            </p>
+            </h1>
             <div className="w-full flex justify-center h-56 ">
               <textarea
-                disabled={isAnalysisResult}
                 value={context}
                 onChange={(e)=> setContext(e.target.value)}
-                className="w-1/2 h-40 block p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg outline outline-2 outline-primary"
+                className="w-1/2 h-40 block p-2.5 text-sm text-gray-900 bg-gray-50 rounded-box outline outline-[#80868A] hover:outline-[#202124]"
                 placeholder="My project is an IoT project which uses sensors to record the value of outdoor temperature..."/>
             </div>
             {isAnalysisResult ?
               <div className="">
-                <CustomTable titles={titles} rows={rows} onCheckbox={handleCheckbox}/>
+                <CustomTable data={analysis} setSubmitAnalysis={setSubmitAnalysis}/>
                 <div className="flex justify-center my-8">
                   <Button text="Submit" onClick={()=> handleSubmit()}/>
                 </div>
@@ -199,13 +167,10 @@ export default function App() {
           <div className="container min-h-main flex flex-col justify-center items-center">
             <div className="h-56 text-center">
               <h1 className="text-xl sm:text-3xl font-bold">
-                Lorem ipsum dolor sit amet
+                Dingdong !!
               </h1>
-              <p className="py-4 text-sm sm:text-base">
-                consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-              </p>
             </div>
-            <CustomTable titles={resultTitles} rows={resultRows}/>
+            {/* <CustomTable titles={resultTitles} rows={resultRows}/> */}
           </div>
           }
         </div>
