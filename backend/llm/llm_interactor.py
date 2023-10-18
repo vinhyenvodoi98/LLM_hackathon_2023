@@ -1,12 +1,28 @@
+import json
+from typing import List
+
 from llm.llm_base.output_parser import OutputParser
-from llm.llm_base.prompt import BasicPrompt, FewShotPrompt
+from llm.llm_base.prompt import BasicPrompt, FewShotPrompt, SelectingFewShotPrompt
 from llm.config.prompt_config import *
 
 
-def get_requirement_analysis_result(input: str) -> str:
-    prompt = FewShotPrompt(requirement_analysis_prompt_config, input)
+def get_requirement_analysis_result(project_context: str) -> str:
+    prompt = FewShotPrompt(requirement_analysis_prompt_config, project_context)
     analysis_result = prompt.get_result_with_text_model()
     result = OutputParser.json_extract(analysis_result)
+
+    return result
+
+
+def get_selecting_analysis_result(
+    database_names: List[str],
+    questions: dict
+) -> str:
+    question_str = json.dumps(questions)
+    prompt_input = f"Databases: {', '.join(database_names)}\nAspects:\n{question_str}"
+    prompt = SelectingFewShotPrompt(selecting_prompt_config, prompt_input)
+    analysis_result = prompt.get_result_with_text_model()
+    result = OutputParser.json_array_extract(analysis_result)
 
     return result
 
@@ -17,11 +33,16 @@ def get_basic_prompt_example_result(input: str) -> str:
 
     return result
 
-# Test
-# response = get_requirement_analysis_result("I want to make a mobile app for reading books. The book reading app allows reading pdf and epub text files downloaded to your phone. At the same time, the app also has the function of interacting with other users such as writing book reviews, reading other people's book reviews, commenting on book reviews, following other users,... The database needs to store data about user information, book information, books that users have read, reviews that users have written, and comments from users. I expect that in the first year there will be about 10,000 users and 1,000 books.")
-# print(response)
-#
-# json_response = OutputParser.json_extract(response)
-# print(json_response["data_model"]["data_type"])
-#
-# print(get_basic_prompt_example_result("MongoDB"))
+
+# if __name__ == '__main__':
+#     response = get_selecting_analysis_result(
+#         ["Redis", "Cloud Memorystore", "Firestore"],
+#         {
+#             "data_type": "Which type of data can this database store?",
+#             "volume": "How suitable is this database for storing a large set of time series data?",
+#             "read_consistency": "How good is this data's read consistency?",
+#             "respond_time": "How good is this database response time?",
+#             "maturity": "How mature is this database?"
+#         }
+#     )
+#     print(response)

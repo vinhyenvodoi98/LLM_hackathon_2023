@@ -59,8 +59,42 @@ class FewShotPrompt(Prompt):
             
             for example in config["examples"] 
         ]
-        # print(config["examples"][0])
+
         return config    
+    
+class SelectingFewShotPrompt(Prompt):
+
+    def __init__(self, config, input: str) -> PromptTemplate:
+        parsed_config = self.__parse_config(config)
+
+        example_prompt = PromptTemplate(
+            input_variables=parsed_config["example_input_variables"],
+            template=parsed_config["example_template"]
+        )
+
+        few_shot_prompt = FewShotPromptTemplate(
+            examples=parsed_config["examples"], 
+            example_prompt=example_prompt, 
+            prefix="\n".join([ parsed_config["context"], parsed_config["prefix"] ]),
+            suffix=parsed_config["suffix"], 
+            input_variables=[ parsed_config["actual_input_variable"] ],
+        )
+
+        formatted_prompt = few_shot_prompt.format(**{ parsed_config["actual_input_variable"]: input.replace("{", "$").replace("}", "&").replace("\n", "") })
+
+        self.prompt = PromptTemplate(template=formatted_prompt, input_variables=[])
+
+    def __parse_config(self, config):
+        config["examples"] = [ 
+            {
+                "requirement": example["requirement"].replace("{", "$").replace("}", "&").replace("\n", ""),
+                "analysis_result": example["analysis_result"].replace("{", "$").replace("}", "&").replace("\n", "")
+            }
+            
+            for example in config["examples"] 
+        ]
+
+        return config   
     
 class BasicPrompt(Prompt):
 
