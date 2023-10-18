@@ -206,7 +206,7 @@ requirement_analysis_prompt_config = {
             "analysis_result": {
                 "data_model": {
                     "data_type": {
-                        "value": ["text", "number", "datetime", "boolean", "json"],
+                        "value": ["Text", "Number", "Datetime", "Boolean", "JSON"],
                         "reason": "The choice of data types is based on the following considerations:\n\nText: This data type is suitable for storing textual information such as token names, symbols, and descriptions.\n\nNumber: This data type is suitable for storing numeric information such as token prices, volumes, and market capitalizations.\n\nDatetime: This data type is suitable for storing timestamps, such as when a token price was updated.\n\nBoolean: This data type is suitable for storing binary values such as whether a token is tradable or not.\n\nJSON: This data type is suitable for storing complex data structures such as order books and trade histories.",
                     },
                     "unstructured_data": {
