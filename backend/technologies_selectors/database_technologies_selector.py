@@ -175,7 +175,7 @@ class DatabaseTechnologiesSelector:
                     score += database["small_volume"][volume_key]
                 if target_volume == DatabaseAnalysisVolumeEnum.MEDIUM:
                     score += database["small_volume"][volume_key]
-                if target_volume == DatabaseAnalysisVolumeEnum.HIGH:
+                if target_volume == DatabaseAnalysisVolumeEnum.LARGE:
                     score += database["large_volume"][volume_key]
             score *= (database["maturity"] / 10)
             scores.append(
@@ -188,20 +188,20 @@ class DatabaseTechnologiesSelector:
         return scores
 
 
-if __name__ == '__main__':
-    selector = DatabaseTechnologiesSelector()
-    analysis = APIAnalysisRequestModel(
-        data_type=[
-            DatabaseAnalysisDataTypeEnum.DATETIME,
-            DatabaseAnalysisDataTypeEnum.TEXT,
-            DatabaseAnalysisDataTypeEnum.NUMBER
-        ],
-        unstructured_data=False,
-        time_series=False,
-        volume=[DatabaseAnalysisVolumeEnum.MEDIUM, DatabaseAnalysisVolumeEnum.HIGH],
-        fast_response_time=True,
-        read_consistency=True,
-        high_write_workloads=True,
-        commercial_allow=True
-    )
-    pprint(selector.get_top_k_technologies(analysis))
+# if __name__ == '__main__':
+#     selector = DatabaseTechnologiesSelector()
+#     analysis = APIAnalysisRequestModel(
+#         data_type=[
+#             DatabaseAnalysisDataTypeEnum.DATETIME,
+#             DatabaseAnalysisDataTypeEnum.TEXT,
+#             DatabaseAnalysisDataTypeEnum.NUMBER
+#         ],
+#         unstructured_data=False,
+#         time_series=False,
+#         volume=[DatabaseAnalysisVolumeEnum.MEDIUM],
+#         fast_response_time=True,
+#         read_consistency=True,
+#         high_write_workloads=True,
+#         commercial_allow=True
+#     )
+#     pprint(selector.get_top_k_technologies(analysis))
