@@ -10,9 +10,3 @@ def get_all_technology_types() -> List[DBTechnologyType]:
         DBTechnologyType.from_dict(technology)
         for technology in db_technology_types
     ]
-
-
-# TODO: create dataclass for response
-def get_all_database_type_technologies() -> List[dict]:
-    from database.database_type_technology import db_database_type_technologies
-    return db_database_type_technologies
