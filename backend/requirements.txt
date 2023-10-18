@@ -26,3 +26,4 @@ deeplake==3.8.1
 google-generativeai
 tiktoken==0.5.1
 python-dotenv==1.0.0
+json5==0.9.14

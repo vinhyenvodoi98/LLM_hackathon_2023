@@ -2,7 +2,7 @@ from langchain.prompts import PromptTemplate, FewShotPromptTemplate
 from langchain.chains import LLMChain
 import json
 
-from llm.llm_base.palm_model import PalmModel
+from llm.llm_base.palm_model import build_text_model, build_chat_model
 
 
 class Prompt:
@@ -12,15 +12,15 @@ class Prompt:
     def __init__(self) -> None:
         pass
 
-    def get_result_with_text_model(self) -> str:
-        llm = PalmModel.text_model
+    def get_result_with_text_model(self, temperature: float = 0.5) -> str:
+        llm = build_text_model(temperature)
         chain = LLMChain(llm=llm, prompt=self.prompt)
         response = chain.run({})
 
         return response
     
-    def get_result_with_chat_model(self) -> str:
-        llm = PalmModel.chat_model
+    def get_result_with_chat_model(self, temperature: float = 0.2) -> str:
+        llm = build_chat_model(temperature)
         chain = LLMChain(llm=llm, prompt=self.prompt)
         response = chain.run({})
 

@@ -1,4 +1,5 @@
-import json
+import json5
+
 
 class OutputParser:
 
@@ -9,7 +10,7 @@ class OutputParser:
 
         json_string = output[json_start_index:json_end_index + 1]
         correct_formatted_json_string = json_string.replace("$", "{").replace("&", "}").replace("\n", "")
-        json_object = json.loads(correct_formatted_json_string)
+        json_object = json5.loads(correct_formatted_json_string)
         return json_object
     
     @staticmethod
@@ -19,5 +20,5 @@ class OutputParser:
 
         json_string = output[json_start_index:json_end_index + 1]
         correct_formatted_json_string = json_string.replace("$", "{").replace("&", "}").replace("\n", "")
-        json_object = json.loads(correct_formatted_json_string)
+        json_object = json5.loads(correct_formatted_json_string)
         return json_object

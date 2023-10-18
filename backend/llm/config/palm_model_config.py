@@ -1,7 +1,7 @@
 text_model = {
     "model_name": "models/text-bison-001",
     "parameters": {
-        "temperature": 0.7,
+        "temperature": 0.5,
         "max_output_tokens": 1024,
         "top_k": 40,
         "top_p": 0.8
