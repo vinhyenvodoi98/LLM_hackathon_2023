@@ -45,8 +45,8 @@ const Selector = ({value, objkey, setSubmitAnalysis}:{value: any, objkey: string
 export const CustomTable = ({data, setSubmitAnalysis}: CustomTableProps) => {
   const titles = [
     "Objective",
-    "Explanation",
     "Question",
+    "Explanation",
     "Select value"
   ]
 
