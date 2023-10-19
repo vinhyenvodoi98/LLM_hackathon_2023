@@ -82,8 +82,10 @@ export default function App() {
 
   useEffect(() => {
     if(isLoading && document !== null) {
+      // @ts-ignore
       document.getElementById('loading-modal').showModal()
     } else {
+      // @ts-ignore
       document.getElementById('loading-modal').close()
     }
   }, [isLoading])
@@ -112,7 +114,6 @@ export default function App() {
   return (
     <div className="text-text min-h-main p-4">
       {<Loading />}
-      {console.log(submitAnalysis)}
       <div className='grid grid-cols-4 gap-8 p-4 bg-[#F3F6FB] rounded-box min-h-main-component overflow-auto'>
         <div className='h-32 rounded-box bg-[#FFFFFF] col-span-4 p-8 flex justify-center'>
           <Step current={step-1} steps={steps}/>
