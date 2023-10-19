@@ -56,7 +56,6 @@ export default function App() {
       const data = await response.json();
       setResult(data)
       setIsLoading(false)
-      setIsAnalysisResult(true)
       setStep(step+1)
     } catch (error) {
       console.log(error)
@@ -106,6 +105,7 @@ export default function App() {
       const data = await response.json();
       setAnalysis(data)
       setIsLoading(false)
+      setIsAnalysisResult(true)
     } catch (error) {
       console.log(error)
       setIsLoading(false)
