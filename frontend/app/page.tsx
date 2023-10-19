@@ -4,6 +4,7 @@ import { Button, ButtonOutline } from "@/app/components/button"
 import { CustomTable } from "@/app/components/table"
 import Step from "@/app/components/Step"
 import Loading from "./components/loading"
+import { TableResult } from "./components/tableresult"
 
 type TechRes = {
   enable: boolean,
@@ -20,6 +21,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false)
   const [analysis, setAnalysis] = useState<any>({})
   const [submitAnalysis, setSubmitAnalysis] = useState<any>({})
+  const [result, setResult] = useState<any>()
 
   const steps = [{
     title: "Select Techs",
@@ -45,18 +47,15 @@ export default function App() {
   const handleSubmit = async () => {
     setIsLoading(true)
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/analysis/technology_type/${selectedTech}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/analysis/technology_type/${selectedTech}?k=3`, {
         method: "POST",
-        body: JSON.stringify({
-          analysis: submitAnalysis,
-          context: context,
-        }),
+        body: JSON.stringify(submitAnalysis),
         headers: {
           "Content-Type": "application/json",
         },
       });
       const data = await response.json();
-      console.log(data)
+      setResult(data)
       setIsLoading(false)
     } catch (error) {
       console.log(error)
@@ -102,7 +101,6 @@ export default function App() {
         },
       });
       const data = await response.json();
-      console.log(data)
       setAnalysis(data)
       setIsLoading(false)
     } catch (error) {
@@ -114,6 +112,7 @@ export default function App() {
   return (
     <div className="text-text min-h-main p-4">
       {<Loading />}
+      {console.log(submitAnalysis)}
       <div className='grid grid-cols-4 gap-8 p-4 bg-[#F3F6FB] rounded-box min-h-main-component overflow-auto'>
         <div className='h-32 rounded-box bg-[#FFFFFF] col-span-4 p-8 flex justify-center'>
           <Step current={step-1} steps={steps}/>
@@ -170,7 +169,7 @@ export default function App() {
                 Dingdong !!
               </h1>
             </div>
-            {/* <CustomTable titles={resultTitles} rows={resultRows}/> */}
+            <TableResult data={result}/>
           </div>
           }
         </div>
