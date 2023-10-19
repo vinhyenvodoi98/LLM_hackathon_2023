@@ -30,3 +30,8 @@ body {
 .min-h-main {
   @apply min-h-[calc(100vh-100px)];
 }
+
+/* Class to adjust with sticky footer */
+.min-h-main-component {
+  @apply min-h-[calc(100vh-100px-32px)];
+}
