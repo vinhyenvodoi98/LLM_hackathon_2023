@@ -47,7 +47,7 @@ export default function App() {
   const handleSubmit = async () => {
     setIsLoading(true)
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/analysis/technology_type/${selectedTech}?k=3`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/selecting/technology_type/${selectedTech}?k=3`, {
         method: "POST",
         body: JSON.stringify(submitAnalysis),
         headers: {
